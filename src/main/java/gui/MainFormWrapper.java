@@ -2,6 +2,8 @@ package gui;
 
 import gui.forms.MainForm;
 
+import javax.swing.*;
+
 public class MainFormWrapper {
 
     private MainForm mainForm;
@@ -22,5 +24,9 @@ public class MainFormWrapper {
 
     public void setMainForm(MainForm mainForm) {
         this.mainForm = mainForm;
+    }
+
+    public JButton retrieveInsertPennyButton() {
+        return mainForm.getInsertPennyButton();
     }
 }

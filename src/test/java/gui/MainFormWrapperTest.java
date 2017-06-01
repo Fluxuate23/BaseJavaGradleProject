@@ -44,4 +44,11 @@ public class MainFormWrapperTest {
         verify(mockMainForm).pack();
     }
 
+    @Test
+    public void whenRetrieveInsertPennyButtonThenButtonIsRetreivedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getInsertPennyButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveInsertPennyButton(), is(expectedButton));
+    }
+
 }
