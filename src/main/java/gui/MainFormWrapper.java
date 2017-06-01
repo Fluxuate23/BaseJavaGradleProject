@@ -37,4 +37,8 @@ public class MainFormWrapper {
     public JButton retrieveInsertDimeButton() {
         return mainForm.getInsertDimeButton();
     }
+
+    public JButton retrieveInsertQuarterButton() {
+        return mainForm.getInsertQuarterButton();
+    }
 }
