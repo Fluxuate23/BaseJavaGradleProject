@@ -29,4 +29,8 @@ public class MainFormWrapper {
     public JButton retrieveInsertPennyButton() {
         return mainForm.getInsertPennyButton();
     }
+
+    public JButton retrieveInsertNickleButton() {
+        return mainForm.getInsertNickleButton();
+    }
 }

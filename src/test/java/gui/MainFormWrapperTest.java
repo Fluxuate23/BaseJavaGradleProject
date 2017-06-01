@@ -45,10 +45,17 @@ public class MainFormWrapperTest {
     }
 
     @Test
-    public void whenRetrieveInsertPennyButtonThenButtonIsRetreivedFromTheMainForm() {
+    public void whenRetrieveInsertPennyButtonThenButtonIsRetrievedFromTheMainForm() {
         JButton expectedButton = new JButton();
         when(mockMainForm.getInsertPennyButton()).thenReturn(expectedButton);
         assertThat(mainFormWrapper.retrieveInsertPennyButton(), is(expectedButton));
+    }
+
+    @Test
+    public void whenRetrieveInsertNickleButtonThenButtonIsRetrievedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getInsertNickleButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveInsertNickleButton(), is(expectedButton));
     }
 
 }
