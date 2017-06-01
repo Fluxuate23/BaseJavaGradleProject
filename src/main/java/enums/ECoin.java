@@ -1,6 +1,6 @@
 package enums;
 
 public enum ECoin {
-    PENNY(), NICKLE;
+    PENNY(), NICKLE, DIME;
 
 }

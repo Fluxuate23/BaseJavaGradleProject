@@ -138,9 +138,19 @@ public class MainFormWrapperTest {
         verify(mockVendingMachineBrain).insertCoin(ECoin.NICKLE);
     }
 
+    @Test
+    public void givenFormHasBeenLaunchedWhenInsertDimeButtonIsClickedThenVendingMachineBrainHasDimeInserted() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveInsertDimeButton().doClick();
+
+        verify(mockVendingMachineBrain).insertCoin(ECoin.DIME);
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
+        when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
     }
 
 }
