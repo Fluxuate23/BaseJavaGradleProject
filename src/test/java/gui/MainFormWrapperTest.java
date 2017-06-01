@@ -1,6 +1,7 @@
 package gui;
 
 import brain.VendingMachineBrain;
+import enums.ECoin;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +21,15 @@ public class MainFormWrapperTest {
 
     private MainFormWrapper mainFormWrapper;
     private MainForm mockMainForm;
+    private VendingMachineBrain mockVendingMachineBrain;
 
     @Before
     public void setUp() {
         mockMainForm = mock(MainForm.class);
+        mockVendingMachineBrain = mock(VendingMachineBrain.class);
         mainFormWrapper = new MainFormWrapper();
         mainFormWrapper.setMainForm(mockMainForm);
+        mainFormWrapper.setVendingMachineBrain(mockVendingMachineBrain);
     }
 
     @Test
@@ -113,6 +117,15 @@ public class MainFormWrapperTest {
         VendingMachineBrain vendingMachineBrain = mainFormWrapper.getVendingMachineBrain();
         assertThat(vendingMachineBrain, is(not(nullValue())));
         assertThat(vendingMachineBrain, is(instanceOf(VendingMachineBrain.class)));
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenInsertPennyIsClickedThenVendingMachineBrainHasPennyInserted() {
+        when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveInsertPennyButton().doClick();
+
+        verify(mockVendingMachineBrain).insertCoin(ECoin.PENNY);
     }
 
 }

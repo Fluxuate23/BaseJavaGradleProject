@@ -1,6 +1,7 @@
 package gui;
 
 import brain.VendingMachineBrain;
+import enums.ECoin;
 import gui.forms.MainForm;
 
 import javax.swing.*;
@@ -19,6 +20,8 @@ public class MainFormWrapper {
         mainForm.setContentPane(mainForm.getHomePanel());
         mainForm.setVisible(true);
         mainForm.pack();
+
+        mainForm.getInsertPennyButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.PENNY));
     }
 
     public JButton retrieveInsertPennyButton() {
@@ -67,5 +70,9 @@ public class MainFormWrapper {
 
     public VendingMachineBrain getVendingMachineBrain() {
         return vendingMachineBrain;
+    }
+
+    public void setVendingMachineBrain(VendingMachineBrain vendingMachineBrain) {
+        this.vendingMachineBrain = vendingMachineBrain;
     }
 }
