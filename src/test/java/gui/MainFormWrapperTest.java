@@ -79,4 +79,11 @@ public class MainFormWrapperTest {
         assertThat(mainFormWrapper.retrievePurchaseColaButton(), is(expectedButton));
     }
 
+    @Test
+    public void whenRetrievePurchaseChipsButtonThenButtonIsRetrievedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getPurchaseChipsButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrievePurchaseChipsButton(), is(expectedButton));
+    }
+
 }
