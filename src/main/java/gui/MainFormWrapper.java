@@ -49,4 +49,8 @@ public class MainFormWrapper {
     public JButton retrievePurchaseChipsButton() {
         return mainForm.getPurchaseChipsButton();
     }
+
+    public JButton retrievePurchaseCandyButton() {
+        return mainForm.getPurchaseCandyButton();
+    }
 }
