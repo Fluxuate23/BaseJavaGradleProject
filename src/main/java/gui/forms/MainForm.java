@@ -17,6 +17,7 @@ public class MainForm extends JDialog {
     private JButton insertQuarterButton;
     private JButton insertPennyButton;
     private JButton refundButton;
+    private JLabel vendingDisplayLabel;
 
     public JPanel getHomePanel() {
         return homePanel;
@@ -48,6 +49,10 @@ public class MainForm extends JDialog {
 
     public JButton getPurchaseCandyButton() {
         return purchaseCandyButton;
+    }
+
+    public JButton getRefundButton() {
+        return refundButton;
     }
 
     {
@@ -105,10 +110,10 @@ public class MainForm extends JDialog {
         panel3.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         homePanel.add(panel3, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
-        final JLabel label1 = new JLabel();
-        label1.setFont(new Font(label1.getFont().getName(), Font.BOLD, 16));
-        label1.setText("Label");
-        panel3.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        vendingDisplayLabel = new JLabel();
+        vendingDisplayLabel.setFont(new Font(vendingDisplayLabel.getFont().getName(), Font.BOLD, 16));
+        vendingDisplayLabel.setText("Label");
+        panel3.add(vendingDisplayLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
