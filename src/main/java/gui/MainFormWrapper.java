@@ -18,14 +18,6 @@ public class MainFormWrapper {
         mainForm.pack();
     }
 
-    public MainForm getMainForm() {
-        return mainForm;
-    }
-
-    public void setMainForm(MainForm mainForm) {
-        this.mainForm = mainForm;
-    }
-
     public JButton retrieveInsertPennyButton() {
         return mainForm.getInsertPennyButton();
     }
@@ -40,5 +32,17 @@ public class MainFormWrapper {
 
     public JButton retrieveInsertQuarterButton() {
         return mainForm.getInsertQuarterButton();
+    }
+
+    public MainForm getMainForm() {
+        return mainForm;
+    }
+
+    public void setMainForm(MainForm mainForm) {
+        this.mainForm = mainForm;
+    }
+
+    public JButton retrievePurchaseColaButton() {
+        mainForm.getPurchaseColaButton();
     }
 }
