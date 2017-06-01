@@ -22,6 +22,7 @@ public class MainFormWrapper {
         mainForm.pack();
 
         mainForm.getInsertPennyButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.PENNY));
+        mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
     }
 
     public JButton retrieveInsertPennyButton() {

@@ -42,6 +42,7 @@ public class MainFormWrapperTest {
     public void whenLaunchFormThenMainFormSetContentPaneSetVisibleAndPackTheForm() {
         JPanel expectedHomePanel = new JPanel();
         when(mockMainForm.getHomePanel()).thenReturn(expectedHomePanel);
+        stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
 
         verify(mockMainForm).setContentPane(expectedHomePanel);
@@ -120,12 +121,26 @@ public class MainFormWrapperTest {
     }
 
     @Test
-    public void givenFormHasBeenLaunchedWhenInsertPennyIsClickedThenVendingMachineBrainHasPennyInserted() {
-        when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
+    public void givenFormHasBeenLaunchedWhenInsertPennyButtonIsClickedThenVendingMachineBrainHasPennyInserted() {
+        stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
         mainFormWrapper.retrieveInsertPennyButton().doClick();
 
         verify(mockVendingMachineBrain).insertCoin(ECoin.PENNY);
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenInsertNickleButtonIsClickedThenVendingMachineBrainHasNickleInserted() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveInsertNickleButton().doClick();
+
+        verify(mockVendingMachineBrain).insertCoin(ECoin.NICKLE);
+    }
+
+    private void stubMainFormWithRealComponents() {
+        when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
+        when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
     }
 
 }
