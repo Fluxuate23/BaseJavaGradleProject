@@ -1,5 +1,6 @@
 package gui;
 
+import brain.VendingMachineBrain;
 import gui.forms.MainForm;
 
 import javax.swing.*;
@@ -7,8 +8,10 @@ import javax.swing.*;
 public class MainFormWrapper {
 
     private MainForm mainForm;
+    private VendingMachineBrain vendingMachineBrain;
 
     public MainFormWrapper() {
+        vendingMachineBrain = new VendingMachineBrain();
         mainForm = new MainForm();
     }
 
@@ -60,5 +63,9 @@ public class MainFormWrapper {
 
     public JLabel retrieveVendingDisplayLabel() {
         return mainForm.getVendingDisplayLabel();
+    }
+
+    public VendingMachineBrain getVendingMachineBrain() {
+        return vendingMachineBrain;
     }
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import brain.VendingMachineBrain;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
@@ -105,6 +106,13 @@ public class MainFormWrapperTest {
         JLabel expectedLabel = new JLabel();
         when(mockMainForm.getVendingDisplayLabel()).thenReturn(expectedLabel);
         assertThat(mainFormWrapper.retrieveVendingDisplayLabel(), is(expectedLabel));
+    }
+
+    @Test
+    public void whenCreatedThenHasVendingMachineComputer() {
+        VendingMachineBrain vendingMachineBrain = mainFormWrapper.getVendingMachineBrain();
+        assertThat(vendingMachineBrain, is(not(nullValue())));
+        assertThat(vendingMachineBrain, is(instanceOf(VendingMachineBrain.class)));
     }
 
 }
