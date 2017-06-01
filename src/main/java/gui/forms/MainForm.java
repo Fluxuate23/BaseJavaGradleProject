@@ -85,4 +85,8 @@ public class MainForm extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return homePanel;
     }
+
+    public JPanel getHomePanel() {
+        return homePanel;
+    }
 }
