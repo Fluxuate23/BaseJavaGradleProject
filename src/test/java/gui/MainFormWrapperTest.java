@@ -24,6 +24,7 @@ public class MainFormWrapperTest {
     public void setUp() {
         mockMainForm = mock(MainForm.class);
         mainFormWrapper = new MainFormWrapper();
+        mainFormWrapper.setMainForm(mockMainForm);
     }
 
     @Test
@@ -34,10 +35,8 @@ public class MainFormWrapperTest {
 
     @Test
     public void whenLaunchFormThenMainFormSetContentPaneSetVisibleAndPackTheForm() {
-        MainFormWrapper mainFormWrapper = new MainFormWrapper();
         JPanel expectedHomePanel = new JPanel();
         when(mockMainForm.getHomePanel()).thenReturn(expectedHomePanel);
-        mainFormWrapper.setMainForm(mockMainForm);
         mainFormWrapper.launchForm();
 
         verify(mockMainForm).setContentPane(expectedHomePanel);
