@@ -33,4 +33,8 @@ public class MainFormWrapper {
     public JButton retrieveInsertNickleButton() {
         return mainForm.getInsertNickleButton();
     }
+
+    public JButton retrieveInsertDimeButton() {
+        return mainForm.getInsertDimeButton();
+    }
 }

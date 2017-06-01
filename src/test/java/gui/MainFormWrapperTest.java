@@ -58,4 +58,11 @@ public class MainFormWrapperTest {
         assertThat(mainFormWrapper.retrieveInsertNickleButton(), is(expectedButton));
     }
 
+    @Test
+    public void whenRetrieveInsertDimeButtonThenButtonIsRetrievedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getInsertDimeButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveInsertDimeButton(), is(expectedButton));
+    }
+
 }
