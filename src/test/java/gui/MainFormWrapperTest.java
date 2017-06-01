@@ -147,10 +147,20 @@ public class MainFormWrapperTest {
         verify(mockVendingMachineBrain).insertCoin(ECoin.DIME);
     }
 
+    @Test
+    public void givenFormHasBeenLaunchedWhenInsertQuarterButtonIsClickedThenVendingMachineBrainHasQuarterInserted() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveInsertQuarterButton().doClick();
+
+        verify(mockVendingMachineBrain).insertCoin(ECoin.QUARTER);
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
+        when(mockMainForm.getInsertQuarterButton()).thenReturn(new JButton());
     }
 
 }
