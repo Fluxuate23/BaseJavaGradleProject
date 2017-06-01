@@ -57,4 +57,8 @@ public class MainFormWrapper {
     public JButton retrieveRefundButton() {
         return mainForm.getRefundButton();
     }
+
+    public JLabel retrieveVendingDisplayLabel() {
+        return mainForm.getVendingDisplayLabel();
+    }
 }

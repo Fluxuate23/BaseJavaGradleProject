@@ -100,4 +100,11 @@ public class MainFormWrapperTest {
         assertThat(mainFormWrapper.retrieveRefundButton(), is(expectedButton));
     }
 
+    @Test
+    public void whenRetrieveVendingDisplayLabelThenLabelIsRetrievedFromTheMainForm() {
+        JLabel expectedLabel = new JLabel();
+        when(mockMainForm.getVendingDisplayLabel()).thenReturn(expectedLabel);
+        assertThat(mainFormWrapper.retrieveVendingDisplayLabel(), is(expectedLabel));
+    }
+
 }
