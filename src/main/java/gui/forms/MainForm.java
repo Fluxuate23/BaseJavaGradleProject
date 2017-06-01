@@ -7,9 +7,6 @@ import com.intellij.uiDesigner.core.Spacer;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by jg08129 on 5/31/17.
- */
 public class MainForm extends JDialog {
     private JPanel homePanel;
     private JButton purchaseColaButton;
