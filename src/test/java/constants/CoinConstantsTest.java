@@ -30,4 +30,12 @@ public class CoinConstantsTest {
         assertThat(CoinConstants.DIAMETER_IN_MILLIMETERS_OF_QUARTER, is(24.26));
     }
 
+    @Test
+    public void coinConstantsHasCorrectThicknessInMillimetersForPennyNickleDimeAndQuarter() {
+        assertThat(CoinConstants.THICKNESS_MILLIMETERS_OF_PENNY, is(1.52));
+        assertThat(CoinConstants.THICKNESS_MILLIMETERS_OF_NICKLE, is(1.95));
+        assertThat(CoinConstants.THICKNESS_MILLIMETERS_OF_DIME, is(1.35));
+        assertThat(CoinConstants.THICKNESS_MILLIMETERS_OF_QUARTER, is(1.75));
+    }
+
 }
