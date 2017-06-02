@@ -6,7 +6,11 @@ public class VendingMachineBrain {
     private double currentDollarAmount;
 
     public void insertCoin(ECoin insertedCoin) {
-        currentDollarAmount = .05;
+        if (insertedCoin.getDiameterInMillimeters() == 21.21) {
+            currentDollarAmount = .05;
+        } else {
+            currentDollarAmount = 0.0;
+        }
     }
 
     public double getCurrentDollarAmount() {

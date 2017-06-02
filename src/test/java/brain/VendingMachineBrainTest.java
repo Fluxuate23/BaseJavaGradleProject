@@ -16,4 +16,12 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.05));
     }
 
+    @Test
+    public void whenInsertPennyThenCurrentDollarAmountIsZeroCents() {
+        VendingMachineBrain vendingMachineBrain = new VendingMachineBrain();
+        vendingMachineBrain.insertCoin(ECoin.PENNY);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
+    }
+
 }
