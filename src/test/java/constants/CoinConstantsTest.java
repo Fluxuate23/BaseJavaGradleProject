@@ -22,4 +22,12 @@ public class CoinConstantsTest {
         assertThat(CoinConstants.WEIGHT_IN_GRAMS_OF_QUARTER, is(5.67));
     }
 
+    @Test
+    public void coinConstantsHasCorrectDiameterInMillimetersForPennyNickleDimeAndQuarter() {
+        assertThat(CoinConstants.DIAMETER_IN_MILLIMETERS_OF_PENNY, is(19.05));
+        assertThat(CoinConstants.DIAMETER_IN_MILLIMETERS_OF_NICKLE, is(21.21));
+        assertThat(CoinConstants.DIAMETER_IN_MILLIMETERS_OF_DIME, is(17.9));
+        assertThat(CoinConstants.DIAMETER_IN_MILLIMETERS_OF_QUARTER, is(24.26));
+    }
+
 }
