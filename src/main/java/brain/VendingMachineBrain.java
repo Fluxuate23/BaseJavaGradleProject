@@ -3,7 +3,13 @@ package brain;
 import enums.ECoin;
 
 public class VendingMachineBrain {
-    public void insertCoin(ECoin insertedCoin) {
+    private double currentDollarAmount;
 
+    public void insertCoin(ECoin insertedCoin) {
+        currentDollarAmount = .05;
+    }
+
+    public double getCurrentDollarAmount() {
+        return currentDollarAmount;
     }
 }
