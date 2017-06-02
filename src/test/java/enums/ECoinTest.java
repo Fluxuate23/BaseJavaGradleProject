@@ -13,4 +13,11 @@ public class ECoinTest {
         assertThat(ECoin.PENNY.getDiameterInMillimeters(), is(19.05));
         assertThat(ECoin.PENNY.getThicknessInMillimeters(), is(1.52));
     }
+
+    @Test
+    public void nickleHasWeightInGramsOfFiveAndDiameterInMillimetersOfTwentyOnePointTwoOneAndThicknessInMillimetersOfOnePointNineFive() {
+        assertThat(ECoin.NICKLE.getWeightInGrams(), is(5.0));
+        assertThat(ECoin.NICKLE.getDiameterInMillimeters(), is(21.21));
+        assertThat(ECoin.NICKLE.getThicknessInMillimeters(), is(1.95));
+    }
 }

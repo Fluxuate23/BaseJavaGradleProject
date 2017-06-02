@@ -2,7 +2,7 @@ package enums;
 
 public enum ECoin {
     PENNY(2.5, 19.05, 1.52),
-    NICKLE(0, 0, 0),
+    NICKLE(5.0, 21.21, 1.95),
     DIME(0, 0, 0),
     QUARTER(0, 0, 0);
 
