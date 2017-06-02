@@ -2,19 +2,18 @@ package brain;
 
 import enums.ECoin;
 
-import static constants.CoinConstants.DOLLAR_VALUE_OF_DIME;
-import static constants.CoinConstants.DOLLAR_VALUE_OF_NICKLE;
-import static constants.CoinConstants.DOLLAR_VALUE_OF_QUARTER;
+import static constants.CoinConstants.*;
 
 public class VendingMachineBrain {
     private double currentDollarAmount;
 
     public void insertCoin(ECoin insertedCoin) {
-        if (insertedCoin.getDiameterInMillimeters() == 21.21) {
+        double diameterInMillimetersOfInsertedCoin = insertedCoin.getDiameterInMillimeters();
+        if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_NICKLE) {
             currentDollarAmount = DOLLAR_VALUE_OF_NICKLE;
-        } else if (insertedCoin.getDiameterInMillimeters() == 17.9){
+        } else if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_DIME){
             currentDollarAmount = DOLLAR_VALUE_OF_DIME;
-        } else if (insertedCoin.getDiameterInMillimeters() == 24.26) {
+        } else if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER) {
             currentDollarAmount = DOLLAR_VALUE_OF_QUARTER;
         }
     }
