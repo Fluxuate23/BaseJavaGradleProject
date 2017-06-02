@@ -8,8 +8,10 @@ public class VendingMachineBrain {
     public void insertCoin(ECoin insertedCoin) {
         if (insertedCoin.getDiameterInMillimeters() == 21.21) {
             currentDollarAmount = .05;
-        } else {
+        } else if (insertedCoin.getDiameterInMillimeters() == 19.05){
             currentDollarAmount = 0.0;
+        } else if (insertedCoin.getDiameterInMillimeters() == 17.9){
+            currentDollarAmount = 0.1;
         }
     }
 

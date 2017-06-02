@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class VendingMachineBrainTest {
 
     @Test
-    public void whenInsertNickleThenCurrentDollarAmountIsFiveCents() {
+    public void whenInsertCoinWithNickleThenCurrentDollarAmountIsFiveCents() {
         VendingMachineBrain vendingMachineBrain = new VendingMachineBrain();
         vendingMachineBrain.insertCoin(ECoin.NICKLE);
 
@@ -17,11 +17,20 @@ public class VendingMachineBrainTest {
     }
 
     @Test
-    public void whenInsertPennyThenCurrentDollarAmountIsZeroCents() {
+    public void whenInsertCoinWithPennyThenCurrentDollarAmountIsZeroCents() {
         VendingMachineBrain vendingMachineBrain = new VendingMachineBrain();
         vendingMachineBrain.insertCoin(ECoin.PENNY);
 
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
     }
+
+    @Test
+    public void whenInsertCoinWithDimeThenCurrentDollarAmountIsTenCents() {
+        VendingMachineBrain vendingMachineBrain = new VendingMachineBrain();
+        vendingMachineBrain.insertCoin(ECoin.DIME);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.1));
+    }
+
 
 }
