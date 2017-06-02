@@ -14,4 +14,12 @@ public class CoinConstantsTest {
         assertThat(CoinConstants.DOLLAR_VALUE_OF_QUARTER, is(0.25));
     }
 
+    @Test
+    public void coinConstantsHasCorrectWeightInGramsForPennyNickleDimeAndQuarter() {
+        assertThat(CoinConstants.WEIGHT_IN_GRAMS_OF_PENNY, is(2.5));
+        assertThat(CoinConstants.WEIGHT_IN_GRAMS_OF_NICKLE, is(5.0));
+        assertThat(CoinConstants.WEIGHT_IN_GRAMS_OF_DIME, is(2.268));
+        assertThat(CoinConstants.WEIGHT_IN_GRAMS_OF_QUARTER, is(5.67));
+    }
+
 }
