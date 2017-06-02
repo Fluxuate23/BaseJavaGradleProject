@@ -20,4 +20,11 @@ public class ECoinTest {
         assertThat(ECoin.NICKLE.getDiameterInMillimeters(), is(21.21));
         assertThat(ECoin.NICKLE.getThicknessInMillimeters(), is(1.95));
     }
+
+    @Test
+    public void dimeHasWeightInGramsOfTwoPointTwoSixEightAndDiameterInMillimetersOfSeventeenPointNineAndThicknessInMillimetersOfOnePointThreeFive() {
+        assertThat(ECoin.DIME.getWeightInGrams(), is(2.268));
+        assertThat(ECoin.DIME.getDiameterInMillimeters(), is(17.9));
+        assertThat(ECoin.DIME.getThicknessInMillimeters(), is(1.35));
+    }
 }
