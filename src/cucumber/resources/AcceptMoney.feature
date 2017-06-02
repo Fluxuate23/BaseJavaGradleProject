@@ -23,3 +23,11 @@ Feature: Accept Coins
     Given A Vending Machine is running
     When I insert a Quarter into the vending machine
     Then the display shows "$0.25"
+
+  Scenario: Inserting multiple coins accumulates the total and displays it
+    Given A Vending Machine is running
+    When I insert a Penny into the vending machine
+    And I insert a Nickle into the vending machine
+    And I insert a Dime into the vending machine
+    And I insert a Quarter into the vending machine
+    Then the display shows "$0.40"
