@@ -21,4 +21,24 @@ public class MainFormWrapperStepDefinitions {
         assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(displayText));
     }
 
+    @When("^I insert a Penny into the vending machine$")
+    public void i_insert_a_Penny_into_the_vending_machine() {
+        mainFormWrapper.retrieveInsertPennyButton().doClick();
+    }
+
+    @When("^I insert a Nickle into the vending machine$")
+    public void i_insert_a_Nickle_into_the_vending_machine() {
+        mainFormWrapper.retrieveInsertNickleButton().doClick();
+    }
+
+    @When("^I insert a Dime into the vending machine$")
+    public void i_insert_a_Dime_into_the_vending_machine() {
+        mainFormWrapper.retrieveInsertDimeButton().doClick();
+    }
+
+    @When("^I insert a Quarter into the vending machine$")
+    public void i_insert_a_Quarter_into_the_vending_machine() {
+        mainFormWrapper.retrieveInsertQuarterButton().doClick();
+    }
+
 }
