@@ -32,5 +32,13 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.1));
     }
 
+    @Test
+    public void whenInsertCoinWithQuarterThenCurrentDollarAmountIsTwentyFiveCents() {
+        VendingMachineBrain vendingMachineBrain = new VendingMachineBrain();
+        vendingMachineBrain.insertCoin(ECoin.QUARTER);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.25));
+    }
+
 
 }

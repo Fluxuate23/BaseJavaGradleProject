@@ -12,6 +12,8 @@ public class VendingMachineBrain {
             currentDollarAmount = 0.0;
         } else if (insertedCoin.getDiameterInMillimeters() == 17.9){
             currentDollarAmount = 0.1;
+        } else if (insertedCoin.getDiameterInMillimeters() == 24.26) {
+            currentDollarAmount = 0.25;
         }
     }
 
