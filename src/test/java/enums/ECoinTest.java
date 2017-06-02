@@ -27,4 +27,11 @@ public class ECoinTest {
         assertThat(ECoin.DIME.getDiameterInMillimeters(), is(17.9));
         assertThat(ECoin.DIME.getThicknessInMillimeters(), is(1.35));
     }
+
+    @Test
+    public void quarterHasWeightInGramsOfFivePointSixSevenAndDiameterInMillimetersOfTwentyFourPointTwoSixAndThicknessInMillimetersOfOnePointSevenFive() {
+        assertThat(ECoin.QUARTER.getWeightInGrams(), is(5.67));
+        assertThat(ECoin.QUARTER.getDiameterInMillimeters(), is(24.26));
+        assertThat(ECoin.QUARTER.getThicknessInMillimeters(), is(1.75));
+    }
 }
