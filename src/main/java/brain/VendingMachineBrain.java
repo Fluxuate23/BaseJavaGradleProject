@@ -8,6 +8,8 @@ import java.text.DecimalFormat;
 import static constants.CoinConstants.*;
 
 public class VendingMachineBrain {
+    private static final String DECIMAL_PATTERN = "0.00";
+    private static final String VENDING_DISPLAY_LABEL_FORMAT = "$%s";
     private double currentDollarAmount;
     private MainFormData mainFormData;
 
@@ -26,9 +28,9 @@ public class VendingMachineBrain {
         }
 
         if (diameterInMillimetersOfInsertedCoin != DIAMETER_IN_MILLIMETERS_OF_PENNY) {
-            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
             String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
-            mainFormData.updateVendingDisplayLabel(String.format("$%s", currentDollarAmountAsString));
+            mainFormData.updateVendingDisplayLabel(String.format(VENDING_DISPLAY_LABEL_FORMAT, currentDollarAmountAsString));
         }
     }
 
