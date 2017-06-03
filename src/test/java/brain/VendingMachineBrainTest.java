@@ -60,4 +60,12 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(9000.1));
     }
 
+    @Test
+    public void givenCurrentDollarAmountGreaterThanZeroWhenInsertCoinWithQuarterThenIncrementDollarAmountByTwentyFiveCents() {
+        vendingMachineBrain.setCurrentDollarAmount(0.01);
+        vendingMachineBrain.insertCoin(ECoin.QUARTER);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.26));
+    }
+
 }
