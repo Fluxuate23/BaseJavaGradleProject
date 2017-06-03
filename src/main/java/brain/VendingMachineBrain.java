@@ -19,15 +19,15 @@ public class VendingMachineBrain {
 
     public void insertCoin(ECoin insertedCoin) {
         double diameterInMillimetersOfInsertedCoin = insertedCoin.getDiameterInMillimeters();
-        if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_NICKLE) {
+        if (isDiameterOfANickle(diameterInMillimetersOfInsertedCoin)) {
             currentDollarAmount += DOLLAR_VALUE_OF_NICKLE;
-        } else if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_DIME) {
+        } else if (isDiameterOfADime(diameterInMillimetersOfInsertedCoin)) {
             currentDollarAmount += DOLLAR_VALUE_OF_DIME;
-        } else if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER) {
+        } else if (isDiameterOfAQuarter(diameterInMillimetersOfInsertedCoin)) {
             currentDollarAmount += DOLLAR_VALUE_OF_QUARTER;
         }
 
-        if (diameterInMillimetersOfInsertedCoin != DIAMETER_IN_MILLIMETERS_OF_PENNY) {
+        if (!isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
             DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
             String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
             mainFormData.updateVendingDisplayLabel(String.format(VENDING_DISPLAY_LABEL_FORMAT, currentDollarAmountAsString));
@@ -40,5 +40,21 @@ public class VendingMachineBrain {
 
     public void setCurrentDollarAmount(double currentDollarAmount) {
         this.currentDollarAmount = currentDollarAmount;
+    }
+
+    private boolean isDiameterOfAPenny(double diameterInMillimetersOfInsertedCoin) {
+        return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_PENNY;
+    }
+
+    private boolean isDiameterOfANickle(double diameterInMillimetersOfInsertedCoin) {
+        return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_NICKLE;
+    }
+
+    private boolean isDiameterOfADime(double diameterInMillimetersOfInsertedCoin) {
+        return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_DIME;
+    }
+
+    private boolean isDiameterOfAQuarter(double diameterInMillimetersOfInsertedCoin) {
+        return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER;
     }
 }
