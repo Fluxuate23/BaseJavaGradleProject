@@ -6,8 +6,6 @@ import gui.forms.MainForm;
 
 import javax.swing.*;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 public class MainFormWrapper {
 
@@ -25,6 +23,7 @@ public class MainFormWrapper {
         mainForm.setContentPane(mainForm.getHomePanel());
         mainForm.setVisible(true);
         mainForm.pack();
+        mainForm.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         mainForm.getInsertPennyButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.PENNY));
         mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));

@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -183,6 +184,13 @@ public class MainFormWrapperTest {
         mainFormWrapper.updateVendingDisplayLabel(propertyChangeEvent);
 
         assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
+    @Test
+    public void whenLaunchFormThenSetDefaultCloseOperationToDisposeOnClose() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+        verify(mockMainForm).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private void stubMainFormWithRealComponents() {
