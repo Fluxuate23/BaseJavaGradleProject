@@ -34,11 +34,6 @@ public class MainFormWrapper {
 
     }
 
-    protected void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
-        String updatedVendingDisplayLabelText = propertyChangeEvent.getNewValue().toString();
-        mainForm.getVendingDisplayLabel().setText(updatedVendingDisplayLabelText);
-    }
-
     public JButton retrieveInsertPennyButton() {
         return mainForm.getInsertPennyButton();
     }
@@ -53,14 +48,6 @@ public class MainFormWrapper {
 
     public JButton retrieveInsertQuarterButton() {
         return mainForm.getInsertQuarterButton();
-    }
-
-    public MainForm getMainForm() {
-        return mainForm;
-    }
-
-    public void setMainForm(MainForm mainForm) {
-        this.mainForm = mainForm;
     }
 
     public JButton retrievePurchaseColaButton() {
@@ -83,8 +70,16 @@ public class MainFormWrapper {
         return mainForm.getVendingDisplayLabel();
     }
 
+    public MainForm getMainForm() {
+        return mainForm;
+    }
+
     public VendingMachineBrain getVendingMachineBrain() {
         return vendingMachineBrain;
+    }
+
+    public void setMainForm(MainForm mainForm) {
+        this.mainForm = mainForm;
     }
 
     public void setVendingMachineBrain(VendingMachineBrain vendingMachineBrain) {
@@ -93,5 +88,10 @@ public class MainFormWrapper {
 
     public void setMainFormData(MainFormData mainFormData) {
         this.mainFormData = mainFormData;
+    }
+
+    protected void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
+        String updatedVendingDisplayLabelText = propertyChangeEvent.getNewValue().toString();
+        mainForm.getVendingDisplayLabel().setText(updatedVendingDisplayLabelText);
     }
 }
