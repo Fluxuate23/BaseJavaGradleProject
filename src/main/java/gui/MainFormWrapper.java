@@ -31,14 +31,11 @@ public class MainFormWrapper {
         mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
 
-        PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
+        mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
 
-            }
-        };
+    }
 
-        mainFormData.addUpdateVendingDisplayLabelListener(propertyChangeListener);
+    private void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
 
     }
 
