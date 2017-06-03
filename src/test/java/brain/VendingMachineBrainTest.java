@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class VendingMachineBrainTest {
@@ -86,6 +88,13 @@ public class VendingMachineBrainTest {
         vendingMachineBrain.insertCoin(ECoin.DIME);
 
         verify(mockMainFormData).updateVendingDisplayLabel("$0.21");
+    }
+
+    @Test
+    public void whenInsertPennyThenDoNotUpdateVendingDisplayLabel() {
+        vendingMachineBrain.insertCoin(ECoin.PENNY);
+
+        verify(mockMainFormData, never()).updateVendingDisplayLabel(anyString());
     }
 
 }
