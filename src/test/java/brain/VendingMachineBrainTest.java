@@ -44,4 +44,13 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.25));
     }
 
+    @Test
+    public void givenCurrentDollarAmountGreaterThanZeroWhenInsertCoinWithNickleThenIncrementDollarAmountByFiveCents() {
+        vendingMachineBrain.setCurrentDollarAmount(350);
+
+        vendingMachineBrain.insertCoin(ECoin.NICKLE);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(350.05));
+    }
+
 }
