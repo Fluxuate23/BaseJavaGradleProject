@@ -91,6 +91,13 @@ public class VendingMachineBrainTest {
     }
 
     @Test
+    public void whenInsertCoinAndDollarAmountHasOneDecimalPointThenUpdateVendingDiplayLabelWithFormatShowingTwoDecimalPoints() {
+        vendingMachineBrain.insertCoin(ECoin.DIME);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$0.10");
+    }
+
+    @Test
     public void whenInsertPennyThenDoNotUpdateVendingDisplayLabel() {
         vendingMachineBrain.insertCoin(ECoin.PENNY);
 

@@ -26,7 +26,7 @@ public class VendingMachineBrain {
         }
 
         if (diameterInMillimetersOfInsertedCoin != DIAMETER_IN_MILLIMETERS_OF_PENNY) {
-            DecimalFormat decimalFormat = new DecimalFormat("0.##");
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
             String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
             mainFormData.updateVendingDisplayLabel(String.format("$%s", currentDollarAmountAsString));
         }
