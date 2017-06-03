@@ -80,4 +80,12 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData).updateVendingDisplayLabel("$0.25");
     }
 
+    @Test
+    public void givenCurrentDollarAmountGreaterThanZeroWhenInsertCoinThenUpdateMainFormDataWithFormattedCurrentDollarAmount() {
+        vendingMachineBrain.setCurrentDollarAmount(0.11111111111);
+        vendingMachineBrain.insertCoin(ECoin.DIME);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$0.21");
+    }
+
 }

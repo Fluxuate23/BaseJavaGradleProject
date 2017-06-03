@@ -23,8 +23,10 @@ public class VendingMachineBrain {
             currentDollarAmount += DOLLAR_VALUE_OF_DIME;
         } else if (diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER) {
             currentDollarAmount += DOLLAR_VALUE_OF_QUARTER;
-            mainFormData.updateVendingDisplayLabel("$0.25");
         }
+        DecimalFormat decimalFormat = new DecimalFormat("0.##");
+        String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
+        mainFormData.updateVendingDisplayLabel(String.format("$%s", currentDollarAmountAsString));
     }
 
     public double getCurrentDollarAmount() {
