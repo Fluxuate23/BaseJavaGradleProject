@@ -16,4 +16,3 @@
  
 ## Additional Notes
  - Requires Java 8
- - Only tested on Mac, but it should work on all platforms as it is a java application
