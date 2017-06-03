@@ -1,7 +1,8 @@
-package gui;
+package gui.forms;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
+import gui.MainFormWrapper;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
