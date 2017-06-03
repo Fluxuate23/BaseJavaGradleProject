@@ -37,4 +37,18 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).addPropertyChangeListener("VendingMachineLabelKey", mockPropertyChangeListener);
     }
+
+    @Test
+    public void givenVendingDisplayLabelListenerWhenUpdateVendingDisplayLabelThenPropertyChangeSupportPropertyChangeIsFiredWithVendingDisplayLabelKey() {
+        MainFormData mainFormData = new MainFormData();
+        mockPropertyChangeSupport = mock(PropertyChangeSupport.class);
+        mockPropertyChangeListener = mock(PropertyChangeListener.class);
+        mainFormData.setPropertyChangeSupport(mockPropertyChangeSupport);
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+        String expectedNewValue = "Test strings are the best part of every PR";
+
+        mainFormData.updateVendingDisplayLabel(expectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange("VendingMachineLabelKey", "", expectedNewValue);
+    }
 }

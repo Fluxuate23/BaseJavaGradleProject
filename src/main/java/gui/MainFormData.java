@@ -11,7 +11,7 @@ public class MainFormData {
     }
 
     public void updateVendingDisplayLabel(String displayedText) {
-
+        propertyChangeSupport.firePropertyChange("VendingMachineLabelKey", "", displayedText);
     }
 
     public void addUpdateVendingDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
