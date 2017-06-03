@@ -1,19 +1,24 @@
 package brain;
 
 import enums.ECoin;
+import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class VendingMachineBrainTest {
 
     private VendingMachineBrain vendingMachineBrain;
+    private MainFormData mockMainFormData;
 
     @Before
     public void setUp() {
-        vendingMachineBrain = new VendingMachineBrain();
+        mockMainFormData = mock(MainFormData.class);
+        vendingMachineBrain = new VendingMachineBrain(mockMainFormData);
     }
 
     @Test
@@ -66,6 +71,13 @@ public class VendingMachineBrainTest {
         vendingMachineBrain.insertCoin(ECoin.QUARTER);
 
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.26));
+    }
+
+    @Test
+    public void whenInsertCoinThenUpdateMainFormDataWithCurrentDollarAmount() {
+        vendingMachineBrain.insertCoin(ECoin.QUARTER);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$0.25");
     }
 
 }

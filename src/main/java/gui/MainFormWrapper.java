@@ -12,7 +12,7 @@ public class MainFormWrapper {
     private VendingMachineBrain vendingMachineBrain;
 
     public MainFormWrapper() {
-        vendingMachineBrain = new VendingMachineBrain();
+        vendingMachineBrain = new VendingMachineBrain(new MainFormData());
         mainForm = new MainForm();
     }
 
