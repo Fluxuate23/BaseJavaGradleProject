@@ -116,7 +116,7 @@ public class MainForm extends JDialog {
         panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
         vendingDisplayLabel = new JLabel();
         vendingDisplayLabel.setFont(new Font(vendingDisplayLabel.getFont().getName(), Font.BOLD, 16));
-        vendingDisplayLabel.setText("Label");
+        vendingDisplayLabel.setText("INSERT COIN");
         panel3.add(vendingDisplayLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 

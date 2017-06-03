@@ -2,13 +2,20 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
+import gui.MainFormWrapper;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import javax.swing.*;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -22,14 +29,17 @@ public class MainFormWrapperTest {
     private MainFormWrapper mainFormWrapper;
     private MainForm mockMainForm;
     private VendingMachineBrain mockVendingMachineBrain;
+    private MainFormData mockMainFormData;
 
     @Before
     public void setUp() {
         mockMainForm = mock(MainForm.class);
         mockVendingMachineBrain = mock(VendingMachineBrain.class);
+        mockMainFormData = mock(MainFormData.class);
         mainFormWrapper = new MainFormWrapper();
         mainFormWrapper.setMainForm(mockMainForm);
         mainFormWrapper.setVendingMachineBrain(mockVendingMachineBrain);
+        mainFormWrapper.setMainFormData(mockMainFormData);
     }
 
     @Test
@@ -42,7 +52,7 @@ public class MainFormWrapperTest {
     public void whenLaunchFormThenMainFormSetContentPaneSetVisibleAndPackTheForm() {
         JPanel expectedHomePanel = new JPanel();
         when(mockMainForm.getHomePanel()).thenReturn(expectedHomePanel);
-        stubMainFormWithRealComponents();
+        stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();
 
         verify(mockMainForm).setContentPane(expectedHomePanel);
@@ -156,11 +166,46 @@ public class MainFormWrapperTest {
         verify(mockVendingMachineBrain).insertCoin(ECoin.QUARTER);
     }
 
+    @Test
+    public void whenLaunchFormThenAddVendingDisplayLabelListenerToMainFormData() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+
+        verify(mockMainFormData).addUpdateVendingDisplayLabelListener(Matchers.any());
+    }
+
+    @Test
+    public void givenFormIsLaunchedWhenUpdateVendingDisplayLabelThenVendingDisplayLabelTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedNewVendingDisplayLabelText = "The Forge is pretty cool, I guess";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, "VendingMachineLabel", "", expectedNewVendingDisplayLabelText);
+
+        mainFormWrapper.updateVendingDisplayLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
+    @Test
+    public void whenLaunchFormThenSetDefaultCloseOperationToDisposeOnClose() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+        verify(mockMainForm).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertQuarterButton()).thenReturn(new JButton());
+        when(mockMainForm.getVendingDisplayLabel()).thenReturn(new JLabel());
+    }
+
+    private void stubMainFormWithMockComponents() {
+        when(mockMainForm.getInsertPennyButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getInsertNickleButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getInsertDimeButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getInsertQuarterButton()).thenReturn(mock(JButton.class));
     }
 
 }
