@@ -1,4 +1,4 @@
-package gui.forms;
+package gui;
 
 import gui.MainFormData;
 import org.junit.Test;
@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import static gui.MainFormData.VENDING_MACHINE_LABEL_KEY;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
@@ -35,7 +36,7 @@ public class MainFormDataTest {
 
         mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
 
-        verify(mockPropertyChangeSupport).addPropertyChangeListener("VendingMachineLabelKey", mockPropertyChangeListener);
+        verify(mockPropertyChangeSupport).addPropertyChangeListener(VENDING_MACHINE_LABEL_KEY, mockPropertyChangeListener);
     }
 
     @Test
@@ -49,6 +50,6 @@ public class MainFormDataTest {
 
         mainFormData.updateVendingDisplayLabel(expectedNewValue);
 
-        verify(mockPropertyChangeSupport).firePropertyChange("VendingMachineLabelKey", "", expectedNewValue);
+        verify(mockPropertyChangeSupport).firePropertyChange(VENDING_MACHINE_LABEL_KEY, "", expectedNewValue);
     }
 }

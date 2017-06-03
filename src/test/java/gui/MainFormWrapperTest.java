@@ -1,4 +1,4 @@
-package gui.forms;
+package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;

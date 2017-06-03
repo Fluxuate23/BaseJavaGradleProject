@@ -4,6 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class MainFormData {
+    protected static final String VENDING_MACHINE_LABEL_KEY = "VendingMachineLabelKey";
+
     private PropertyChangeSupport propertyChangeSupport;
 
     public MainFormData() {
@@ -11,11 +13,11 @@ public class MainFormData {
     }
 
     public void updateVendingDisplayLabel(String displayedText) {
-        propertyChangeSupport.firePropertyChange("VendingMachineLabelKey", "", displayedText);
+        propertyChangeSupport.firePropertyChange(VENDING_MACHINE_LABEL_KEY, "", displayedText);
     }
 
     public void addUpdateVendingDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
-        propertyChangeSupport.addPropertyChangeListener("VendingMachineLabelKey", propertyChangeListener);
+        propertyChangeSupport.addPropertyChangeListener(VENDING_MACHINE_LABEL_KEY, propertyChangeListener);
     }
 
     public PropertyChangeSupport getPropertyChangeSupport() {
