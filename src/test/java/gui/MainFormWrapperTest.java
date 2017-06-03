@@ -10,6 +10,9 @@ import org.mockito.Matchers;
 
 import javax.swing.*;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -170,11 +173,24 @@ public class MainFormWrapperTest {
         verify(mockMainFormData).addUpdateVendingDisplayLabelListener(Matchers.any());
     }
 
+    @Test
+    public void givenFormIsLaunchedWhenUpdateVendingDisplayLabelThenVendingDisplayLabelTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedNewVendingDisplayLabelText = "The Forge is pretty cool, I guess";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, "VendingMachineLabel", "", expectedNewVendingDisplayLabelText);
+
+        mainFormWrapper.updateVendingDisplayLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertQuarterButton()).thenReturn(new JButton());
+        when(mockMainForm.getVendingDisplayLabel()).thenReturn(new JLabel());
     }
 
     private void stubMainFormWithMockComponents() {

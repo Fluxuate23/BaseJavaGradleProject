@@ -35,8 +35,9 @@ public class MainFormWrapper {
 
     }
 
-    private void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
-
+    protected void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
+        String updatedVendingDisplayLabelText = propertyChangeEvent.getNewValue().toString();
+        mainForm.getVendingDisplayLabel().setText(updatedVendingDisplayLabelText);
     }
 
     public JButton retrieveInsertPennyButton() {
