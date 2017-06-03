@@ -25,13 +25,8 @@ public class MainFormWrapper {
         mainForm.pack();
         mainForm.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-        mainForm.getInsertPennyButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.PENNY));
-        mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
-        mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
-        mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
-
-        mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
-
+        initializeActionListeners();
+        initializePropertyChangeListeners();
     }
 
     public JButton retrieveInsertPennyButton() {
@@ -93,5 +88,16 @@ public class MainFormWrapper {
     protected void updateVendingDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
         String updatedVendingDisplayLabelText = propertyChangeEvent.getNewValue().toString();
         mainForm.getVendingDisplayLabel().setText(updatedVendingDisplayLabelText);
+    }
+
+    private void initializePropertyChangeListeners() {
+        mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
+    }
+
+    private void initializeActionListeners() {
+        mainForm.getInsertPennyButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.PENNY));
+        mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
+        mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
+        mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
     }
 }
