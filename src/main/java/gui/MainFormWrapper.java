@@ -5,14 +5,19 @@ import enums.ECoin;
 import gui.forms.MainForm;
 
 import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class MainFormWrapper {
 
     private MainForm mainForm;
     private VendingMachineBrain vendingMachineBrain;
+    private MainFormData mainFormData;
 
     public MainFormWrapper() {
-        vendingMachineBrain = new VendingMachineBrain(new MainFormData());
+        mainFormData = new MainFormData();
+        vendingMachineBrain = new VendingMachineBrain(mainFormData);
         mainForm = new MainForm();
     }
 
@@ -25,6 +30,16 @@ public class MainFormWrapper {
         mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
         mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
+
+        PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+
+            }
+        };
+
+        mainFormData.addUpdateVendingDisplayLabelListener(propertyChangeListener);
+
     }
 
     public JButton retrieveInsertPennyButton() {
@@ -77,5 +92,9 @@ public class MainFormWrapper {
 
     public void setVendingMachineBrain(VendingMachineBrain vendingMachineBrain) {
         this.vendingMachineBrain = vendingMachineBrain;
+    }
+
+    public void setMainFormData(MainFormData mainFormData) {
+        this.mainFormData = mainFormData;
     }
 }
