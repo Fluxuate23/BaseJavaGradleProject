@@ -6,11 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class VendingMachineBrainTest {
 
@@ -102,6 +100,68 @@ public class VendingMachineBrainTest {
         vendingMachineBrain.insertCoin(ECoin.PENNY);
 
         verify(mockMainFormData, never()).updateVendingDisplayLabel(anyString());
+    }
+
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanZeroWhenReturnCoinsThenCurrentDollarAmountIsResetToZero() {
+        vendingMachineBrain.setCurrentDollarAmount(100);
+        vendingMachineBrain.returnCoins();
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
+    }
+
+    @Test
+    public void givenCurrentDollarAmountGreaterThanZeroWhenReturnCoinsThenUpdateMainFormDataWithFormattedCurrentDollarAmountBeforeItIsResetToZero() {
+        vendingMachineBrain.setCurrentDollarAmount(0.1);
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData).updateCoinReturnLabel("$0.10");
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
+    }
+
+    @Test
+    public void givenCurrentDollarAmountIsZeroWhenReturnCoinsThenDoNotUpdateMainFormData() {
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData, never()).updateVendingDisplayLabel(anyString());
+        verify(mockMainFormData, never()).updateCoinReturnLabel(anyString());
+    }
+
+    @Test
+    public void givenCurrentCoinReturnDollarAmountAndCurrentDollarAmountAreGreaterThanZeroWhenReturnCoinsThenUpdateMainFormDataWithAddedValues() {
+        vendingMachineBrain.setCurrentCoinReturnDollarAmount(50.0);
+        vendingMachineBrain.setCurrentDollarAmount(25.0);
+
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData).updateCoinReturnLabel("$75.00");
+    }
+
+    @Test
+    public void givenCurrentCoinReturnDollarAmountGreaterThanZeroWhenCollectCoinReturnThenCurrentCoinReturnDollarAmountIsSetToZeroAndMainFormDataUpdatesCoinReturnLabel() {
+        vendingMachineBrain.setCurrentCoinReturnDollarAmount(1.1);
+
+        vendingMachineBrain.collectCoinReturn();
+
+        verify(mockMainFormData).updateCoinReturnLabel("");
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(0.0));
+    }
+
+    @Test
+    public void whenInsertCoinWithPennyThenUpdateMainFormDataCoinReturnToHaveOneCentAndCurrentCoinReturnDollarAmountToOneCent() {
+        vendingMachineBrain.insertCoin(ECoin.PENNY);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(0.01));
+        verify(mockMainFormData).updateCoinReturnLabel("$0.01");
+    }
+
+    @Test
+    public void givenCurrentCoinReturnDollarAmountGreaterThanZeroWhenInsertCoinWithPennyThenAddToCurrentCoinReturnDollarAmountAndUpdateMainFormWithNewValue() {
+        vendingMachineBrain.setCurrentCoinReturnDollarAmount(.25);
+        vendingMachineBrain.insertCoin(ECoin.PENNY);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(0.26));
+        verify(mockMainFormData).updateCoinReturnLabel("$0.26");
     }
 
 }

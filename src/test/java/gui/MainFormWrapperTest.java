@@ -2,27 +2,22 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
-import gui.MainFormWrapper;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.swing.*;
-
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import static gui.MainFormData.COIN_RETURN_LABEL_KEY;
+import static gui.MainFormData.VENDING_MACHINE_LABEL_KEY;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 
 public class MainFormWrapperTest {
 
@@ -112,8 +107,8 @@ public class MainFormWrapperTest {
     @Test
     public void whenRetrieveRefundButtonThenButtonIsRetrievedFromTheMainForm() {
         JButton expectedButton = new JButton();
-        when(mockMainForm.getRefundButton()).thenReturn(expectedButton);
-        assertThat(mainFormWrapper.retrieveRefundButton(), is(expectedButton));
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveReturnCoinsButton(), is(expectedButton));
     }
 
     @Test
@@ -171,7 +166,7 @@ public class MainFormWrapperTest {
         stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();
 
-        verify(mockMainFormData).addUpdateVendingDisplayLabelListener(Matchers.any());
+        verify(mockMainFormData).addUpdateVendingDisplayLabelListener(any());
     }
 
     @Test
@@ -179,11 +174,43 @@ public class MainFormWrapperTest {
         stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
         String expectedNewVendingDisplayLabelText = "The Forge is pretty cool, I guess";
-        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, "VendingMachineLabel", "", expectedNewVendingDisplayLabelText);
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, VENDING_MACHINE_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
 
         mainFormWrapper.updateVendingDisplayLabel(propertyChangeEvent);
 
         assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
+    @Test
+    public void whenRetrieveCollectCoinReturnButtonThenButtonIsRetrievedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getCollectCoinReturnButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveCollectCoinReturnButton(), is(expectedButton));
+    }
+
+    @Test
+    public void whenRetrieveCoinReturnLabelThenLabelIsRetrievedFromTheMainForm() {
+        JLabel expectedLabel = new JLabel();
+        when(mockMainForm.getCoinReturnLabel()).thenReturn(expectedLabel);
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel(), is(expectedLabel));
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenReturnCoinButtonIsClickedThenVendingMachineBrainReturnsCoins() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveReturnCoinsButton().doClick();
+
+        verify(mockVendingMachineBrain).returnCoins();
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenCollectCoinReturnButtonIsClickedThenVendingMachineBrainIsInformedThatCoinsHaveBeenCollected() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveCollectCoinReturnButton().doClick();
+
+        verify(mockVendingMachineBrain).collectCoinReturn();
     }
 
     @Test
@@ -193,12 +220,35 @@ public class MainFormWrapperTest {
         verify(mockMainForm).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
+    @Test
+    public void whenLaunchFormThenCoinReturnDisplayLabelListenerToMainFormData() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+
+        verify(mockMainFormData).addUpdateCoinReturnDisplayLabelListener(any());
+    }
+
+    @Test
+    public void givenFormIsLaunchedWhenUpdateCoinReturnDisplayLabelThenCoinReturnDisplayLabelTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedNewVendingDisplayLabelText = "In hindsight, the Roman Numeral Kata may have been faster";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
+
+        mainFormWrapper.updateCoinReturnDisplayLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertQuarterButton()).thenReturn(new JButton());
         when(mockMainForm.getVendingDisplayLabel()).thenReturn(new JLabel());
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(new JButton());
+        when(mockMainForm.getCollectCoinReturnButton()).thenReturn(new JButton());
+        when(mockMainForm.getCoinReturnLabel()).thenReturn(new JLabel());
     }
 
     private void stubMainFormWithMockComponents() {
@@ -206,6 +256,8 @@ public class MainFormWrapperTest {
         when(mockMainForm.getInsertNickleButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getInsertDimeButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getInsertQuarterButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getCollectCoinReturnButton()).thenReturn(mock(JButton.class));
     }
 
 }

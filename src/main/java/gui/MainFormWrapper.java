@@ -57,12 +57,20 @@ public class MainFormWrapper {
         return mainForm.getPurchaseCandyButton();
     }
 
-    public JButton retrieveRefundButton() {
-        return mainForm.getRefundButton();
+    public JButton retrieveReturnCoinsButton() {
+        return mainForm.getReturnCoinsButton();
     }
 
     public JLabel retrieveVendingDisplayLabel() {
         return mainForm.getVendingDisplayLabel();
+    }
+
+    public JLabel retrieveCoinReturnLabel() {
+        return mainForm.getCoinReturnLabel();
+    }
+
+    public JButton retrieveCollectCoinReturnButton() {
+        return mainForm.getCollectCoinReturnButton();
     }
 
     public MainForm getMainForm() {
@@ -90,8 +98,14 @@ public class MainFormWrapper {
         mainForm.getVendingDisplayLabel().setText(updatedVendingDisplayLabelText);
     }
 
+    protected void updateCoinReturnDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
+        String updatedCoinReturnDisplayLabelText = propertyChangeEvent.getNewValue().toString();
+        mainForm.getCoinReturnLabel().setText(updatedCoinReturnDisplayLabelText);
+    }
+
     private void initializePropertyChangeListeners() {
         mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
+        mainFormData.addUpdateCoinReturnDisplayLabelListener(this::updateCoinReturnDisplayLabel);
     }
 
     private void initializeActionListeners() {
@@ -99,5 +113,7 @@ public class MainFormWrapper {
         mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
         mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
+        mainForm.getReturnCoinsButton().addActionListener(e -> vendingMachineBrain.returnCoins());
+        mainForm.getCollectCoinReturnButton().addActionListener(e -> vendingMachineBrain.collectCoinReturn());
     }
 }
