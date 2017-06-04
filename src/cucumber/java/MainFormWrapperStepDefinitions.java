@@ -41,4 +41,19 @@ public class MainFormWrapperStepDefinitions {
         mainFormWrapper.retrieveInsertQuarterButton().doClick();
     }
 
+    @When("^I select the return coins button$")
+    public void i_select_the_return_coins_button() {
+        mainFormWrapper.retrieveReturnCoinsButton().doClick();
+    }
+
+    @Then("^the coin return has \"(.*?)\"$")
+    public void the_coin_return_has(String returnedChange) {
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(returnedChange));
+    }
+
+    @When("^I collect change from the coin return$")
+    public void i_collect_change_from_the_coin_return() {
+        mainFormWrapper.retrieveCollectCoinReturnButton().doClick();
+    }
+
 }

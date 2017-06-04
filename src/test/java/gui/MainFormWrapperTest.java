@@ -2,7 +2,6 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
-import gui.MainFormWrapper;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +10,8 @@ import org.mockito.Matchers;
 import javax.swing.*;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.any;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -112,8 +108,8 @@ public class MainFormWrapperTest {
     @Test
     public void whenRetrieveRefundButtonThenButtonIsRetrievedFromTheMainForm() {
         JButton expectedButton = new JButton();
-        when(mockMainForm.getRefundButton()).thenReturn(expectedButton);
-        assertThat(mainFormWrapper.retrieveRefundButton(), is(expectedButton));
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveReturnCoinsButton(), is(expectedButton));
     }
 
     @Test

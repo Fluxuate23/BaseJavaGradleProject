@@ -57,8 +57,8 @@ public class MainFormWrapper {
         return mainForm.getPurchaseCandyButton();
     }
 
-    public JButton retrieveRefundButton() {
-        return mainForm.getRefundButton();
+    public JButton retrieveReturnCoinsButton() {
+        return mainForm.getReturnCoinsButton();
     }
 
     public JLabel retrieveVendingDisplayLabel() {
@@ -99,5 +99,13 @@ public class MainFormWrapper {
         mainForm.getInsertNickleButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.NICKLE));
         mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
+    }
+
+    public JLabel retrieveCoinReturnLabel() {
+        return null;
+    }
+
+    public JButton retrieveCollectCoinReturnButton() {
+        return null;
     }
 }
