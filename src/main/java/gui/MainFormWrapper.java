@@ -65,6 +65,14 @@ public class MainFormWrapper {
         return mainForm.getVendingDisplayLabel();
     }
 
+    public JLabel retrieveCoinReturnLabel() {
+        return mainForm.getCoinReturnLabel();
+    }
+
+    public JButton retrieveCollectCoinReturnButton() {
+        return mainForm.getCollectCoinReturnButton();
+    }
+
     public MainForm getMainForm() {
         return mainForm;
     }
@@ -107,13 +115,5 @@ public class MainFormWrapper {
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
         mainForm.getReturnCoinsButton().addActionListener(e -> vendingMachineBrain.returnCoins());
         mainForm.getCollectCoinReturnButton().addActionListener(e -> vendingMachineBrain.collectCoinReturn());
-    }
-
-    public JLabel retrieveCoinReturnLabel() {
-        return mainForm.getCoinReturnLabel();
-    }
-
-    public JButton retrieveCollectCoinReturnButton() {
-        return mainForm.getCollectCoinReturnButton();
     }
 }
