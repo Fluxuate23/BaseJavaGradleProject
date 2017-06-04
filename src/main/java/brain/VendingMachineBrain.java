@@ -55,6 +55,10 @@ public class VendingMachineBrain {
         this.currentDollarAmount = currentDollarAmount;
     }
 
+    public void setCurrentCoinReturnDollarAmount(double currentCoinReturnDollarAmount) {
+        this.currentCoinReturnDollarAmount = currentCoinReturnDollarAmount;
+    }
+
     private boolean isDiameterOfAPenny(double diameterInMillimetersOfInsertedCoin) {
         return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_PENNY;
     }
@@ -69,10 +73,6 @@ public class VendingMachineBrain {
 
     private boolean isDiameterOfAQuarter(double diameterInMillimetersOfInsertedCoin) {
         return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER;
-    }
-
-    public void setCurrentCoinReturnDollarAmount(double currentCoinReturnDollarAmount) {
-        this.currentCoinReturnDollarAmount = currentCoinReturnDollarAmount;
     }
 
     private String formatDollarAmount(double dollarAmountToFormat) {
