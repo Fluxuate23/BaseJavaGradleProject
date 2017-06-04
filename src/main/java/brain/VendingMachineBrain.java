@@ -57,4 +57,8 @@ public class VendingMachineBrain {
     private boolean isDiameterOfAQuarter(double diameterInMillimetersOfInsertedCoin) {
         return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER;
     }
+
+    public void returnCoins() {
+
+    }
 }

@@ -197,6 +197,15 @@ public class MainFormWrapperTest {
     }
 
     @Test
+    public void givenFormHasBeenLaunchedWhenReturnCoinButtonIsClickedThenVendingMachineBrainReturnsCoins() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrieveReturnCoinsButton().doClick();
+
+        verify(mockVendingMachineBrain).returnCoins();
+    }
+
+    @Test
     public void whenLaunchFormThenSetDefaultCloseOperationToDisposeOnClose() {
         stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();
@@ -209,6 +218,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getInsertDimeButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertQuarterButton()).thenReturn(new JButton());
         when(mockMainForm.getVendingDisplayLabel()).thenReturn(new JLabel());
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(new JButton());
     }
 
     private void stubMainFormWithMockComponents() {
@@ -216,6 +226,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getInsertNickleButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getInsertDimeButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getInsertQuarterButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getReturnCoinsButton()).thenReturn(mock(JButton.class));
     }
 
 }
