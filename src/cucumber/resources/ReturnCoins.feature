@@ -13,7 +13,7 @@ Feature: Return Coins
     And I insert a Quarter into the vending machine
     When I select the return coins button
     Then the display shows "INSERT COIN"
-    And the coin return has "$0.40"
+    And the coin return has "$0.41"
 
   Scenario: Returning change multiple times accumulates change in the coin return
     Given A Vending Machine is running
