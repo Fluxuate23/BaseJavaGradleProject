@@ -100,6 +100,7 @@ public class MainFormWrapper {
         mainForm.getInsertDimeButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.DIME));
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
         mainForm.getReturnCoinsButton().addActionListener(e -> vendingMachineBrain.returnCoins());
+        mainForm.getCollectCoinReturnButton().addActionListener(e -> vendingMachineBrain.collectCoinReturn());
     }
 
     public JLabel retrieveCoinReturnLabel() {

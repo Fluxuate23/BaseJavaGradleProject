@@ -61,4 +61,8 @@ public class VendingMachineBrain {
     public void returnCoins() {
 
     }
+
+    public void collectCoinReturn() {
+
+    }
 }
