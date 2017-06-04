@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import static gui.MainFormData.COIN_RETURN_LABEL_KEY;
 import static gui.MainFormData.VENDING_MACHINE_LABEL_KEY;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
@@ -52,5 +53,12 @@ public class MainFormDataTest {
         mainFormData.updateVendingDisplayLabel(expectedNewValue);
 
         verify(mockPropertyChangeSupport).firePropertyChange(VENDING_MACHINE_LABEL_KEY, "", expectedNewValue);
+    }
+
+    @Test
+    public void whenAddUpdateCoinReturnDisplayLabelListenerThenPropertyChangeSupportHasPropertyChangeListenerAddedWithCoinReturnDisplayLabelKey() {
+        mainFormData.addUpdateCoinReturnDisplayLabelListener(mockPropertyChangeListener);
+
+        verify(mockPropertyChangeSupport).addPropertyChangeListener(COIN_RETURN_LABEL_KEY, mockPropertyChangeListener);
     }
 }

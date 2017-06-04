@@ -5,6 +5,7 @@ import java.beans.PropertyChangeSupport;
 
 public class MainFormData {
     protected static final String VENDING_MACHINE_LABEL_KEY = "VendingMachineLabelKey";
+    protected static final String COIN_RETURN_LABEL_KEY = "CoinReturnLabelKey";
 
     private PropertyChangeSupport propertyChangeSupport;
 
@@ -30,5 +31,9 @@ public class MainFormData {
 
     public void updateCoinReturnLabel(String formattedCoinReturnText) {
 
+    }
+
+    public void addUpdateCoinReturnDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
+        propertyChangeSupport.addPropertyChangeListener(COIN_RETURN_LABEL_KEY, propertyChangeListener);
     }
 }
