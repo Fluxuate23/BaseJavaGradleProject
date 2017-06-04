@@ -122,5 +122,6 @@ public class MainFormWrapper {
         mainForm.getCollectCoinReturnButton().addActionListener(e -> vendingMachineBrain.collectCoinReturn());
         mainForm.getPurchaseColaButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.COLA));
         mainForm.getPurchaseChipsButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.CHIPS));
+        mainForm.getPurchaseCandyButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.CANDY));
     }
 }
