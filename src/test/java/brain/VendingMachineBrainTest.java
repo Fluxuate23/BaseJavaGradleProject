@@ -1,11 +1,19 @@
 package brain;
 
 import enums.ECoin;
+import enums.EVendingProduct;
 import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -162,6 +170,12 @@ public class VendingMachineBrainTest {
 
         assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(0.26));
         verify(mockMainFormData).updateCoinReturnLabel("$0.26");
+    }
+
+    @Test
+    public void whenCreatedThenItCreatesAScheduledExecutorService() {
+        assertThat(vendingMachineBrain.getScheduledExecutorService(), is(not(nullValue())));
+        assertThat(vendingMachineBrain.getScheduledExecutorService(), is(instanceOf(ExecutorService.class)));
     }
 
 }

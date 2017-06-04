@@ -5,6 +5,9 @@ import enums.EVendingProduct;
 import gui.MainFormData;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 
 import static constants.CoinConstants.*;
 
@@ -14,9 +17,11 @@ public class VendingMachineBrain {
     private double currentDollarAmount;
     private double currentCoinReturnDollarAmount;
     private MainFormData mainFormData;
+    private ScheduledExecutorService scheduledExecutorService;
 
     public VendingMachineBrain(MainFormData mainFormData) {
         this.mainFormData = mainFormData;
+        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     }
 
     public void insertCoin(ECoin insertedCoin) {
@@ -92,5 +97,9 @@ public class VendingMachineBrain {
 
     public void purchaseProduct(EVendingProduct product) {
 
+    }
+
+    public ScheduledExecutorService getScheduledExecutorService() {
+        return scheduledExecutorService;
     }
 }
