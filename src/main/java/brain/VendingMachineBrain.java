@@ -21,7 +21,7 @@ public class VendingMachineBrain {
     public void insertCoin(ECoin insertedCoin) {
         double diameterInMillimetersOfInsertedCoin = insertedCoin.getDiameterInMillimeters();
         if (isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
-            currentCoinReturnDollarAmount += .01;
+            currentCoinReturnDollarAmount += DOLLAR_VALUE_OF_PENNY;
             mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
         } else {
             if (isDiameterOfANickle(diameterInMillimetersOfInsertedCoin)) {
