@@ -139,4 +139,14 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData).updateCoinReturnLabel("$75.00");
     }
 
+    @Test
+    public void givenCurrentCoinReturnDollarAmountGreaterThanZeroWhenCollectCoinReturnThenCurrentCoinReturnDollarAmountIsSetToZeroAndMainFormDataUpdatesCoinReturnLabel() {
+        vendingMachineBrain.setCurrentCoinReturnDollarAmount(1.1);
+
+        vendingMachineBrain.collectCoinReturn();
+
+        verify(mockMainFormData).updateCoinReturnLabel("");
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(0.0));
+    }
+
 }

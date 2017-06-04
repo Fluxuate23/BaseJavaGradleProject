@@ -1,6 +1,5 @@
 package gui;
 
-import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
 

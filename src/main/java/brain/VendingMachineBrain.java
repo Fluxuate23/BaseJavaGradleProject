@@ -44,6 +44,8 @@ public class VendingMachineBrain {
     }
 
     public void collectCoinReturn() {
+        mainFormData.updateCoinReturnLabel("");
+        currentCoinReturnDollarAmount = 0.0;
 
     }
 
@@ -79,5 +81,9 @@ public class VendingMachineBrain {
         DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
         String dollarAmountAsString = decimalFormat.format(dollarAmountToFormat);
         return String.format(DOLLAR_SIGN_DISPLAY_FORMAT, dollarAmountAsString);
+    }
+
+    public double getCurrentCoinReturnDollarAmount() {
+        return currentCoinReturnDollarAmount;
     }
 }
