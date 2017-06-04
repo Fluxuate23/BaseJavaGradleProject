@@ -30,6 +30,9 @@ public class VendingMachineBrain {
 
         if (!isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
             mainFormData.updateVendingDisplayLabel(formatDollarAmount(currentDollarAmount));
+        } else {
+            currentCoinReturnDollarAmount = .01;
+            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
         }
     }
 
