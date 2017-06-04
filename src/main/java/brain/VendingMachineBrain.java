@@ -57,8 +57,10 @@ public class VendingMachineBrain {
     }
 
     public void returnCoins() {
-        mainFormData.updateVendingDisplayLabel("INSERT COIN");
-        mainFormData.updateCoinReturnLabel(retrieveFormattedCurrentDollarAmount());
+        if (currentDollarAmount != 0.0) {
+            mainFormData.updateVendingDisplayLabel("INSERT COIN");
+            mainFormData.updateCoinReturnLabel(retrieveFormattedCurrentDollarAmount());
+        }
         currentDollarAmount = 0.0;
     }
 

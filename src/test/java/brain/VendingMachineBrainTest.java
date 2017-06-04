@@ -128,4 +128,12 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsZeroWhenReturnCoinsThenDoNotUpdateMainFormData() {
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData, never()).updateVendingDisplayLabel(anyString());
+        verify(mockMainFormData, never()).updateCoinReturnLabel(anyString());
+    }
+
 }
