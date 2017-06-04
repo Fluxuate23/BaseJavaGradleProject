@@ -59,6 +59,7 @@ public class VendingMachineBrain {
     }
 
     public void returnCoins() {
+        mainFormData.updateVendingDisplayLabel("INSERT COIN");
         currentDollarAmount = 0.0;
     }
 

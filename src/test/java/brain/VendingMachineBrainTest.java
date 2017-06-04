@@ -112,4 +112,11 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
     }
 
+    @Test
+    public void whenReturnCoinsThenUpdateMainMainFormDataWithInsertCoin() {
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData).updateVendingDisplayLabel("INSERT COIN");
+    }
+
 }
