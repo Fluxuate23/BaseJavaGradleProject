@@ -12,8 +12,8 @@ public class MainFormData {
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
-    public void updateVendingDisplayLabel(String displayedText) {
-        propertyChangeSupport.firePropertyChange(VENDING_MACHINE_LABEL_KEY, "", displayedText);
+    public void updateVendingDisplayLabel(String formattedVendingDisplayText) {
+        propertyChangeSupport.firePropertyChange(VENDING_MACHINE_LABEL_KEY, "", formattedVendingDisplayText);
     }
 
     public void addUpdateVendingDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
@@ -28,4 +28,7 @@ public class MainFormData {
         this.propertyChangeSupport = propertyChangeSupport;
     }
 
+    public void updateCoinReturnLabel(String formattedCoinReturnText) {
+
+    }
 }

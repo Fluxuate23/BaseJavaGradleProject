@@ -28,9 +28,7 @@ public class VendingMachineBrain {
         }
 
         if (!isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
-            DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
-            String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
-            mainFormData.updateVendingDisplayLabel(String.format(VENDING_DISPLAY_LABEL_FORMAT, currentDollarAmountAsString));
+            mainFormData.updateVendingDisplayLabel(retrieveFormattedCurrentDollarAmount());
         }
     }
 
@@ -60,10 +58,17 @@ public class VendingMachineBrain {
 
     public void returnCoins() {
         mainFormData.updateVendingDisplayLabel("INSERT COIN");
+        mainFormData.updateCoinReturnLabel(retrieveFormattedCurrentDollarAmount());
         currentDollarAmount = 0.0;
     }
 
     public void collectCoinReturn() {
 
+    }
+
+    private String retrieveFormattedCurrentDollarAmount() {
+        DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
+        String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
+        return String.format(VENDING_DISPLAY_LABEL_FORMAT, currentDollarAmountAsString);
     }
 }

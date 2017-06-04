@@ -113,10 +113,19 @@ public class VendingMachineBrainTest {
     }
 
     @Test
-    public void whenReturnCoinsThenUpdateMainMainFormDataWithInsertCoin() {
+    public void whenReturnCoinsThenUpdateMainFormDataWithInsertCoin() {
         vendingMachineBrain.returnCoins();
 
         verify(mockMainFormData).updateVendingDisplayLabel("INSERT COIN");
+    }
+
+    @Test
+    public void givenCurrentDollarAmountGreaterThanZeroWhenReturnCoinsThenUpdateMainFormDataWithFormattedCurrentDollarAmountBeforeItIsResetToZero() {
+        vendingMachineBrain.setCurrentDollarAmount(0.1);
+        vendingMachineBrain.returnCoins();
+
+        verify(mockMainFormData).updateCoinReturnLabel("$0.10");
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
     }
 
 }
