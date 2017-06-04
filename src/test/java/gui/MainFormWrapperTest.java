@@ -16,6 +16,7 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -167,7 +168,7 @@ public class MainFormWrapperTest {
         stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();
 
-        verify(mockMainFormData).addUpdateVendingDisplayLabelListener(Matchers.any());
+        verify(mockMainFormData).addUpdateVendingDisplayLabelListener(any());
     }
 
     @Test
@@ -219,6 +220,14 @@ public class MainFormWrapperTest {
         stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();
         verify(mockMainForm).setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    @Test
+    public void whenLaunchFormThenCoinReturnDisplayLabelListenerToMainFormData() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+
+        verify(mockMainFormData).addUpdateCoinReturnDisplayLabelListener(any());
     }
 
     private void stubMainFormWithRealComponents() {
