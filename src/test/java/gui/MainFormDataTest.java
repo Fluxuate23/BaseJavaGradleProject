@@ -70,4 +70,17 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, "", expectedNewValue);
     }
+
+    @Test
+    public void givenCoinReturnDisplayLabelListenerWhenUpdateVendingDisplayLabelTwiceWithDifferentValuesThenPropertyChangeIsFiredWithDifferentOldValues() {
+        String expectedNewValue = "my acceptance tests caught this problem";
+        String secondExpectedNewValue = "i <3 tdd";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateCoinReturnLabel(expectedNewValue);
+        mainFormData.updateCoinReturnLabel(secondExpectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, "", expectedNewValue);
+        verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, expectedNewValue, secondExpectedNewValue);
+    }
 }

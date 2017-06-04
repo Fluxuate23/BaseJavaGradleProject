@@ -8,6 +8,7 @@ public class MainFormData {
     protected static final String COIN_RETURN_LABEL_KEY = "CoinReturnLabelKey";
 
     private PropertyChangeSupport propertyChangeSupport;
+    private String oldFormattedCoinReturnText = "";
 
     public MainFormData() {
         propertyChangeSupport = new PropertyChangeSupport(this);
@@ -26,7 +27,8 @@ public class MainFormData {
     }
 
     public void updateCoinReturnLabel(String formattedCoinReturnText) {
-        propertyChangeSupport.firePropertyChange(COIN_RETURN_LABEL_KEY, "", formattedCoinReturnText);
+        propertyChangeSupport.firePropertyChange(COIN_RETURN_LABEL_KEY, oldFormattedCoinReturnText, formattedCoinReturnText);
+        oldFormattedCoinReturnText = formattedCoinReturnText;
     }
 
     public void addUpdateCoinReturnDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
