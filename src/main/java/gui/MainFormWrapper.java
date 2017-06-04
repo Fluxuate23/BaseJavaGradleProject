@@ -73,6 +73,10 @@ public class MainFormWrapper {
         return mainForm.getCollectCoinReturnButton();
     }
 
+    public JLabel retrieveDispensedItemLabel() {
+        return null;
+    }
+
     public MainForm getMainForm() {
         return mainForm;
     }
