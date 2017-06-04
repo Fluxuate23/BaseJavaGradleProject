@@ -7,7 +7,7 @@ import gui.MainFormData;
 import java.text.DecimalFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import static constants.CoinConstants.*;
 
@@ -96,10 +96,15 @@ public class VendingMachineBrain {
     }
 
     public void purchaseProduct(EVendingProduct product) {
-
+        mainFormData.updateVendingDisplayLabel("$1.00");
+        scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {
         return scheduledExecutorService;
+    }
+
+    public void setScheduledExecutorService(ScheduledExecutorService scheduledExecutorService) {
+        this.scheduledExecutorService = scheduledExecutorService;
     }
 }

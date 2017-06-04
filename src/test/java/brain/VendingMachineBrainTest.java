@@ -5,10 +5,15 @@ import enums.EVendingProduct;
 import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 
-import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -22,10 +27,12 @@ public class VendingMachineBrainTest {
 
     private VendingMachineBrain vendingMachineBrain;
     private MainFormData mockMainFormData;
+    private ScheduledExecutorService mockScheduledExecutorService;
 
     @Before
     public void setUp() {
         mockMainFormData = mock(MainFormData.class);
+        mockScheduledExecutorService = mock(ScheduledExecutorService.class);
         vendingMachineBrain = new VendingMachineBrain(mockMainFormData);
     }
 
@@ -176,6 +183,18 @@ public class VendingMachineBrainTest {
     public void whenCreatedThenItCreatesAScheduledExecutorService() {
         assertThat(vendingMachineBrain.getScheduledExecutorService(), is(not(nullValue())));
         assertThat(vendingMachineBrain.getScheduledExecutorService(), is(instanceOf(ExecutorService.class)));
+    }
+
+    @Test
+    public void givenLessThanOneDollarWhenPurchaseProductWithColaThenUpdateVendingDisplayLabelToOneDollarAndScheduleFutureToUpdateVendingDisplayLabel() {
+        ArgumentCaptor<MainFormDataRunnableTask> scheduledExecutorServiceArgumentCaptor = ArgumentCaptor.forClass(MainFormDataRunnableTask.class);
+        vendingMachineBrain.setScheduledExecutorService(mockScheduledExecutorService);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$1.00");
+        verify(mockScheduledExecutorService).schedule(scheduledExecutorServiceArgumentCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
+        assertThat(scheduledExecutorServiceArgumentCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
     }
 
 }
