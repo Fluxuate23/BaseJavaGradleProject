@@ -1,6 +1,7 @@
 package gui;
 
 import gui.MainFormData;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.beans.PropertyChangeListener;
@@ -19,21 +20,25 @@ public class MainFormDataTest {
 
     private PropertyChangeSupport mockPropertyChangeSupport;
     private PropertyChangeListener mockPropertyChangeListener;
+    private MainFormData mainFormData;
+
+    @Before
+    public void setUp() {
+        mockPropertyChangeSupport = mock(PropertyChangeSupport.class);
+        mockPropertyChangeListener = mock(PropertyChangeListener.class);
+        mainFormData = new MainFormData();
+        mainFormData.setPropertyChangeSupport(mockPropertyChangeSupport);
+    }
 
     @Test
     public void whenCreatedThenItHasPropertyChangeSupport() {
-        MainFormData mainFormData = new MainFormData();
+        mainFormData = new MainFormData();
         assertThat(mainFormData.getPropertyChangeSupport(), is(not(nullValue())));
         assertThat(mainFormData.getPropertyChangeSupport(), is(instanceOf(PropertyChangeSupport.class)));
     }
 
     @Test
     public void whenAddUpdateVendingDisplayLabelListenerThenPropertyChangeSupportHasPropertyChangeListenerAddedWithVendingDisplayLabelKey() {
-        MainFormData mainFormData = new MainFormData();
-        mockPropertyChangeSupport = mock(PropertyChangeSupport.class);
-        mockPropertyChangeListener = mock(PropertyChangeListener.class);
-        mainFormData.setPropertyChangeSupport(mockPropertyChangeSupport);
-
         mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
 
         verify(mockPropertyChangeSupport).addPropertyChangeListener(VENDING_MACHINE_LABEL_KEY, mockPropertyChangeListener);
@@ -41,12 +46,8 @@ public class MainFormDataTest {
 
     @Test
     public void givenVendingDisplayLabelListenerWhenUpdateVendingDisplayLabelThenPropertyChangeSupportPropertyChangeIsFiredWithVendingDisplayLabelKey() {
-        MainFormData mainFormData = new MainFormData();
-        mockPropertyChangeSupport = mock(PropertyChangeSupport.class);
-        mockPropertyChangeListener = mock(PropertyChangeListener.class);
-        mainFormData.setPropertyChangeSupport(mockPropertyChangeSupport);
-        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
         String expectedNewValue = "Test strings are the best part of every PR";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
 
         mainFormData.updateVendingDisplayLabel(expectedNewValue);
 
