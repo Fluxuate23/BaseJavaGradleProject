@@ -33,6 +33,20 @@ public class VendingMachineBrain {
         }
     }
 
+    public void returnCoins() {
+        currentCoinReturnDollarAmount += currentDollarAmount;
+
+        if (currentDollarAmount != 0.0) {
+            mainFormData.updateVendingDisplayLabel("INSERT COIN");
+            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
+        }
+        currentDollarAmount = 0.0;
+    }
+
+    public void collectCoinReturn() {
+
+    }
+
     public double getCurrentDollarAmount() {
         return currentDollarAmount;
     }
@@ -55,20 +69,6 @@ public class VendingMachineBrain {
 
     private boolean isDiameterOfAQuarter(double diameterInMillimetersOfInsertedCoin) {
         return diameterInMillimetersOfInsertedCoin == DIAMETER_IN_MILLIMETERS_OF_QUARTER;
-    }
-
-    public void returnCoins() {
-        currentCoinReturnDollarAmount += currentDollarAmount;
-
-        if (currentDollarAmount != 0.0) {
-            mainFormData.updateVendingDisplayLabel("INSERT COIN");
-            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
-        }
-        currentDollarAmount = 0.0;
-    }
-
-    public void collectCoinReturn() {
-
     }
 
     public void setCurrentCoinReturnDollarAmount(double currentCoinReturnDollarAmount) {
