@@ -59,7 +59,7 @@ public class VendingMachineBrain {
     }
 
     public void returnCoins() {
-
+        currentDollarAmount = 0.0;
     }
 
     public void collectCoinReturn() {

@@ -104,4 +104,12 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData, never()).updateVendingDisplayLabel(anyString());
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanZeroWhenReturnCoinsThenCurrentDollarAmountIsResetToZero() {
+        vendingMachineBrain.setCurrentDollarAmount(100);
+        vendingMachineBrain.returnCoins();
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
+    }
+
 }
