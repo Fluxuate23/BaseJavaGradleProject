@@ -257,6 +257,15 @@ public class MainFormWrapperTest {
         verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.COLA);
     }
 
+    @Test
+    public void givenFormHasBeenLaunchedWhenPurchaseChipsButtonIsClickedThenVendingMachineBrainIsInformedOfPurchase() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrievePurchaseChipsButton().doClick();
+
+        verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.CHIPS);
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
@@ -267,6 +276,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(new JButton());
         when(mockMainForm.getCoinReturnLabel()).thenReturn(new JLabel());
         when(mockMainForm.getPurchaseColaButton()).thenReturn(new JButton());
+        when(mockMainForm.getPurchaseChipsButton()).thenReturn(new JButton());
     }
 
     private void stubMainFormWithMockComponents() {
@@ -277,6 +287,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getReturnCoinsButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getPurchaseColaButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getPurchaseChipsButton()).thenReturn(mock(JButton.class));
     }
 
 }
