@@ -8,7 +8,7 @@ Feature: Accept Coins
     Given A Vending Machine is running
     When I insert a Penny into the vending machine
     Then the display shows "INSERT COIN"
-    And the coin return has ""$0.01"
+    And the coin return has "$0.01"
 
   Scenario: Inserting a Nickle adds five cents
     Given A Vending Machine is running
