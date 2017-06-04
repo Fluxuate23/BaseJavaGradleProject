@@ -25,15 +25,15 @@ public class MainFormData {
         return propertyChangeSupport;
     }
 
-    public void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
-        this.propertyChangeSupport = propertyChangeSupport;
-    }
-
     public void updateCoinReturnLabel(String formattedCoinReturnText) {
-
+        propertyChangeSupport.firePropertyChange(COIN_RETURN_LABEL_KEY, "", formattedCoinReturnText);
     }
 
     public void addUpdateCoinReturnDisplayLabelListener(PropertyChangeListener propertyChangeListener) {
         propertyChangeSupport.addPropertyChangeListener(COIN_RETURN_LABEL_KEY, propertyChangeListener);
+    }
+
+    public void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
+        this.propertyChangeSupport = propertyChangeSupport;
     }
 }

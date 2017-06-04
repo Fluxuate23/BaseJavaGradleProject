@@ -61,4 +61,14 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).addPropertyChangeListener(COIN_RETURN_LABEL_KEY, mockPropertyChangeListener);
     }
+
+    @Test
+    public void givenCoinReturnDisplayLabelListenerWhenUpdateVendingDisplayLabelThenPropertyChangeSupportPropertyChangeIsFiredWithCoinReturnLabelKey() {
+        String expectedNewValue = "one million dollars";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateCoinReturnLabel(expectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, "", expectedNewValue);
+    }
 }
