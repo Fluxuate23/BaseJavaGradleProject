@@ -11,8 +11,8 @@ public class VendingMachineBrain {
     private static final String DECIMAL_PATTERN = "0.00";
     private static final String DOLLAR_SIGN_DISPLAY_FORMAT = "$%s";
     private double currentDollarAmount;
-    private MainFormData mainFormData;
     private double currentCoinReturnDollarAmount;
+    private MainFormData mainFormData;
 
     public VendingMachineBrain(MainFormData mainFormData) {
         this.mainFormData = mainFormData;
@@ -55,6 +55,10 @@ public class VendingMachineBrain {
         return currentDollarAmount;
     }
 
+    public double getCurrentCoinReturnDollarAmount() {
+        return currentCoinReturnDollarAmount;
+    }
+
     public void setCurrentDollarAmount(double currentDollarAmount) {
         this.currentDollarAmount = currentDollarAmount;
     }
@@ -83,9 +87,5 @@ public class VendingMachineBrain {
         DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
         String dollarAmountAsString = decimalFormat.format(dollarAmountToFormat);
         return String.format(DOLLAR_SIGN_DISPLAY_FORMAT, dollarAmountAsString);
-    }
-
-    public double getCurrentCoinReturnDollarAmount() {
-        return currentCoinReturnDollarAmount;
     }
 }

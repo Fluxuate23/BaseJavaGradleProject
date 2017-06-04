@@ -5,10 +5,8 @@ import enums.ECoin;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Matchers;
 
 import javax.swing.*;
-
 import java.beans.PropertyChangeEvent;
 
 import static gui.MainFormData.COIN_RETURN_LABEL_KEY;
@@ -19,9 +17,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MainFormWrapperTest {
 
