@@ -11,6 +11,8 @@ import javax.swing.*;
 
 import java.beans.PropertyChangeEvent;
 
+import static gui.MainFormData.COIN_RETURN_LABEL_KEY;
+import static gui.MainFormData.VENDING_MACHINE_LABEL_KEY;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
@@ -176,7 +178,7 @@ public class MainFormWrapperTest {
         stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
         String expectedNewVendingDisplayLabelText = "The Forge is pretty cool, I guess";
-        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, "VendingMachineLabel", "", expectedNewVendingDisplayLabelText);
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, VENDING_MACHINE_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
 
         mainFormWrapper.updateVendingDisplayLabel(propertyChangeEvent);
 
@@ -230,6 +232,18 @@ public class MainFormWrapperTest {
         verify(mockMainFormData).addUpdateCoinReturnDisplayLabelListener(any());
     }
 
+    @Test
+    public void givenFormIsLaunchedWhenUpdateCoinReturnDisplayLabelThenCoinReturnDisplayLabelTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedNewVendingDisplayLabelText = "In hindsight, the Roman Numeral Kata may have been faster";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
+
+        mainFormWrapper.updateCoinReturnDisplayLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedNewVendingDisplayLabelText));
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
@@ -238,6 +252,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getVendingDisplayLabel()).thenReturn(new JLabel());
         when(mockMainForm.getReturnCoinsButton()).thenReturn(new JButton());
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(new JButton());
+        when(mockMainForm.getCoinReturnLabel()).thenReturn(new JLabel());
     }
 
     private void stubMainFormWithMockComponents() {

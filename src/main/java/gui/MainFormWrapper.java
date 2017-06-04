@@ -91,7 +91,8 @@ public class MainFormWrapper {
     }
 
     protected void updateCoinReturnDisplayLabel(PropertyChangeEvent propertyChangeEvent) {
-
+        String updatedCoinReturnDisplayLabelText = propertyChangeEvent.getNewValue().toString();
+        mainForm.getCoinReturnLabel().setText(updatedCoinReturnDisplayLabelText);
     }
 
     private void initializePropertyChangeListeners() {
