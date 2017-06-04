@@ -20,19 +20,18 @@ public class VendingMachineBrain {
 
     public void insertCoin(ECoin insertedCoin) {
         double diameterInMillimetersOfInsertedCoin = insertedCoin.getDiameterInMillimeters();
-        if (isDiameterOfANickle(diameterInMillimetersOfInsertedCoin)) {
-            currentDollarAmount += DOLLAR_VALUE_OF_NICKLE;
-        } else if (isDiameterOfADime(diameterInMillimetersOfInsertedCoin)) {
-            currentDollarAmount += DOLLAR_VALUE_OF_DIME;
-        } else if (isDiameterOfAQuarter(diameterInMillimetersOfInsertedCoin)) {
-            currentDollarAmount += DOLLAR_VALUE_OF_QUARTER;
-        }
-
-        if (!isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
-            mainFormData.updateVendingDisplayLabel(formatDollarAmount(currentDollarAmount));
-        } else {
+        if (isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
             currentCoinReturnDollarAmount = .01;
             mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
+        } else {
+            if (isDiameterOfANickle(diameterInMillimetersOfInsertedCoin)) {
+                currentDollarAmount += DOLLAR_VALUE_OF_NICKLE;
+            } else if (isDiameterOfADime(diameterInMillimetersOfInsertedCoin)) {
+                currentDollarAmount += DOLLAR_VALUE_OF_DIME;
+            } else if (isDiameterOfAQuarter(diameterInMillimetersOfInsertedCoin)) {
+                currentDollarAmount += DOLLAR_VALUE_OF_QUARTER;
+            }
+            mainFormData.updateVendingDisplayLabel(formatDollarAmount(currentDollarAmount));
         }
     }
 
