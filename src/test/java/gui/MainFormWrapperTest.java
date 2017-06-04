@@ -183,6 +183,20 @@ public class MainFormWrapperTest {
     }
 
     @Test
+    public void whenRetrieveCollectCoinReturnButtonThenButtonIsRetrievedFromTheMainForm() {
+        JButton expectedButton = new JButton();
+        when(mockMainForm.getCollectCoinReturnButton()).thenReturn(expectedButton);
+        assertThat(mainFormWrapper.retrieveCollectCoinReturnButton(), is(expectedButton));
+    }
+
+    @Test
+    public void whenRetrieveCoinReturnLabelThenLabelIsRetrievedFromTheMainForm() {
+        JLabel expectedLabel = new JLabel();
+        when(mockMainForm.getCoinReturnLabel()).thenReturn(expectedLabel);
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel(), is(expectedLabel));
+    }
+
+    @Test
     public void whenLaunchFormThenSetDefaultCloseOperationToDisposeOnClose() {
         stubMainFormWithMockComponents();
         mainFormWrapper.launchForm();

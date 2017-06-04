@@ -102,10 +102,10 @@ public class MainFormWrapper {
     }
 
     public JLabel retrieveCoinReturnLabel() {
-        return null;
+        return mainForm.getCoinReturnLabel();
     }
 
     public JButton retrieveCollectCoinReturnButton() {
-        return null;
+        return mainForm.getCollectCoinReturnButton();
     }
 }
