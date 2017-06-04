@@ -2,6 +2,7 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
+import enums.EVendingProduct;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
@@ -247,6 +248,15 @@ public class MainFormWrapperTest {
         assertThat(mainFormWrapper.retrieveDispensedItemLabel(), is(expectedLabel));
     }
 
+    @Test
+    public void givenFormHasBeenLaunchedWhenPurchaseColaButtonIsClickedThenVendingMachineBrainIsInformedOfPurchase() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrievePurchaseColaButton().doClick();
+
+        verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.COLA);
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
@@ -256,6 +266,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getReturnCoinsButton()).thenReturn(new JButton());
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(new JButton());
         when(mockMainForm.getCoinReturnLabel()).thenReturn(new JLabel());
+        when(mockMainForm.getPurchaseColaButton()).thenReturn(new JButton());
     }
 
     private void stubMainFormWithMockComponents() {
@@ -265,6 +276,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getInsertQuarterButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getReturnCoinsButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getPurchaseColaButton()).thenReturn(mock(JButton.class));
     }
 
 }

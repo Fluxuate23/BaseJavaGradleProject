@@ -1,6 +1,7 @@
 package brain;
 
 import enums.ECoin;
+import enums.EVendingProduct;
 import gui.MainFormData;
 
 import java.text.DecimalFormat;
@@ -87,5 +88,9 @@ public class VendingMachineBrain {
         DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
         String dollarAmountAsString = decimalFormat.format(dollarAmountToFormat);
         return String.format(DOLLAR_SIGN_DISPLAY_FORMAT, dollarAmountAsString);
+    }
+
+    public void purchaseProduct(EVendingProduct product) {
+
     }
 }
