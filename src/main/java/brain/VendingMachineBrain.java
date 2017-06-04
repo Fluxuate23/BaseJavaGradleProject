@@ -9,9 +9,10 @@ import static constants.CoinConstants.*;
 
 public class VendingMachineBrain {
     private static final String DECIMAL_PATTERN = "0.00";
-    private static final String VENDING_DISPLAY_LABEL_FORMAT = "$%s";
+    private static final String DOLLAR_SIGN_DISPLAY_FORMAT = "$%s";
     private double currentDollarAmount;
     private MainFormData mainFormData;
+    private double currentCoinReturnDollarAmount;
 
     public VendingMachineBrain(MainFormData mainFormData) {
         this.mainFormData = mainFormData;
@@ -28,7 +29,7 @@ public class VendingMachineBrain {
         }
 
         if (!isDiameterOfAPenny(diameterInMillimetersOfInsertedCoin)) {
-            mainFormData.updateVendingDisplayLabel(retrieveFormattedCurrentDollarAmount());
+            mainFormData.updateVendingDisplayLabel(formatDollarAmount(currentDollarAmount));
         }
     }
 
@@ -57,9 +58,11 @@ public class VendingMachineBrain {
     }
 
     public void returnCoins() {
+        currentCoinReturnDollarAmount += currentDollarAmount;
+
         if (currentDollarAmount != 0.0) {
             mainFormData.updateVendingDisplayLabel("INSERT COIN");
-            mainFormData.updateCoinReturnLabel(retrieveFormattedCurrentDollarAmount());
+            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
         }
         currentDollarAmount = 0.0;
     }
@@ -68,9 +71,13 @@ public class VendingMachineBrain {
 
     }
 
-    private String retrieveFormattedCurrentDollarAmount() {
+    public void setCurrentCoinReturnDollarAmount(double currentCoinReturnDollarAmount) {
+        this.currentCoinReturnDollarAmount = currentCoinReturnDollarAmount;
+    }
+
+    private String formatDollarAmount(double dollarAmountToFormat) {
         DecimalFormat decimalFormat = new DecimalFormat(DECIMAL_PATTERN);
-        String currentDollarAmountAsString = decimalFormat.format(currentDollarAmount);
-        return String.format(VENDING_DISPLAY_LABEL_FORMAT, currentDollarAmountAsString);
+        String dollarAmountAsString = decimalFormat.format(dollarAmountToFormat);
+        return String.format(DOLLAR_SIGN_DISPLAY_FORMAT, dollarAmountAsString);
     }
 }
