@@ -240,6 +240,13 @@ public class MainFormWrapperTest {
         assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedNewVendingDisplayLabelText));
     }
 
+    @Test
+    public void whenRetrieveDispensedItemLabelThenLabelIsRetrievedFromTheMainForm() {
+        JLabel expectedLabel = new JLabel();
+        when(mockMainForm.getDispensedItemLabel()).thenReturn(expectedLabel);
+        assertThat(mainFormWrapper.retrieveDispensedItemLabel(), is(expectedLabel));
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());

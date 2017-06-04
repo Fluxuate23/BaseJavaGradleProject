@@ -74,7 +74,7 @@ public class MainFormWrapper {
     }
 
     public JLabel retrieveDispensedItemLabel() {
-        return null;
+        return mainForm.getDispensedItemLabel();
     }
 
     public MainForm getMainForm() {
