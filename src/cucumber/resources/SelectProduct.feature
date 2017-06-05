@@ -30,3 +30,9 @@ Feature: Select Product
     And the display shows "THANK YOU"
     And the display eventually shows "INSERT COIN" within 2 second
 
+  Scenario: Current amount is reset after purchasing an item
+    Given A Vending Machine is running
+    And I insert 4 Quarters into the vending machine
+    When I select the purchase cola button
+    And I insert 1 Dimes into the vending machine
+    Then the display shows "$0.10"

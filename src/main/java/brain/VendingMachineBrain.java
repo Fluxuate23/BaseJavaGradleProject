@@ -112,6 +112,7 @@ public class VendingMachineBrain {
             mainFormData.updateVendingDisplayLabel("THANK YOU");
             mainFormData.updateDispensedItemLabel(productName);
             scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+            currentDollarAmount = 0;
         } else {
             mainFormData.updateVendingDisplayLabel(formatDollarAmount(requiredDollarAmountForPurchase));
             String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);

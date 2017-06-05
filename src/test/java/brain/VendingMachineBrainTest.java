@@ -330,4 +330,13 @@ public class VendingMachineBrainTest {
         assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanTheRequiredAmountToPurchaseProductWhenThatProductIsPurchasedThenCurrentDollarAmountIsResetToZero() {
+        vendingMachineBrain.setCurrentDollarAmount(1.5);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
+    }
+
 }
