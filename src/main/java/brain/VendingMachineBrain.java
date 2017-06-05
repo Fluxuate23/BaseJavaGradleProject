@@ -109,18 +109,17 @@ public class VendingMachineBrain {
         }
 
         if (currentDollarAmount >= requiredDollarAmountForPurchase) {
+            currentCoinReturnDollarAmount = currentDollarAmount - requiredDollarAmountForPurchase;
+            currentDollarAmount = 0;
             mainFormData.updateVendingDisplayLabel("THANK YOU");
             mainFormData.updateDispensedItemLabel(productName);
+            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
             scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
-            currentDollarAmount = 0;
         } else {
             mainFormData.updateVendingDisplayLabel(formatDollarAmount(requiredDollarAmountForPurchase));
             String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
             scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
         }
-
-        currentCoinReturnDollarAmount = .5;
-        mainFormData.updateCoinReturnLabel("$0.50");
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {

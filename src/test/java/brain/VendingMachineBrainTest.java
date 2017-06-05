@@ -358,4 +358,24 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData).updateCoinReturnLabel("$0.50");
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanFiftyCentsWhenPurchaseProductWithChipsThenTheRemainingAmountAfterPurchaseIsSetToCurrentCoinReturnDollarAmountAndMainFormDataIsInformed() {
+        vendingMachineBrain.setCurrentDollarAmount(5000);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.CHIPS);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(4999.5));
+        verify(mockMainFormData).updateCoinReturnLabel("$4999.50");
+    }
+
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanSixtyFiveCentsWhenPurchaseProductWithCandyThenTheRemainingAmountAfterPurchaseIsSetToCurrentCoinReturnDollarAmountAndMainFormDataIsInformed() {
+        vendingMachineBrain.setCurrentDollarAmount(1);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.CANDY);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(.35));
+        verify(mockMainFormData).updateCoinReturnLabel("$0.35");
+    }
+
 }
