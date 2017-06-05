@@ -108,7 +108,7 @@ public class VendingMachineBrain {
                 scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
             }
         } else if ("Chips".equals(product.getName())) {
-            if (currentDollarAmount > .65) {
+            if (currentDollarAmount >= .65) {
                 mainFormData.updateVendingDisplayLabel("THANK YOU");
                 mainFormData.updateDispensedItemLabel("Chips");
                 scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
