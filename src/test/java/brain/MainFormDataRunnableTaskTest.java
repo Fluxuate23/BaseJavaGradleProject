@@ -12,6 +12,7 @@ public class MainFormDataRunnableTaskTest {
     public void whenRunThenUpdateVendingDisplayLabelToDesiredFutureText() {
         MainFormData mockMainFormData = mock(MainFormData.class);
         MainFormDataRunnableTask mainFormDataRunnableTask = new MainFormDataRunnableTask(mockMainFormData, "Let's hope this works!");
+        mainFormDataRunnableTask.run();
         verify(mockMainFormData).updateVendingDisplayLabel("Let's hope this works!");
     }
 
