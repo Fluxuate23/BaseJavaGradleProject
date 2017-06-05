@@ -97,7 +97,8 @@ public class VendingMachineBrain {
 
     public void purchaseProduct(EVendingProduct product) {
         mainFormData.updateVendingDisplayLabel("$1.00");
-        scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+        String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
+        scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {

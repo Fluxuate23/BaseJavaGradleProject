@@ -28,11 +28,13 @@ public class VendingMachineBrainTest {
     private VendingMachineBrain vendingMachineBrain;
     private MainFormData mockMainFormData;
     private ScheduledExecutorService mockScheduledExecutorService;
+    private ArgumentCaptor<MainFormDataRunnableTask> mainFormDataRunnableTaskCaptor;
 
     @Before
     public void setUp() {
         mockMainFormData = mock(MainFormData.class);
         mockScheduledExecutorService = mock(ScheduledExecutorService.class);
+        mainFormDataRunnableTaskCaptor = ArgumentCaptor.forClass(MainFormDataRunnableTask.class);
         vendingMachineBrain = new VendingMachineBrain(mockMainFormData);
     }
 
@@ -186,15 +188,26 @@ public class VendingMachineBrainTest {
     }
 
     @Test
-    public void givenLessThanOneDollarWhenPurchaseProductWithColaThenUpdateVendingDisplayLabelToOneDollarAndScheduleFutureToUpdateVendingDisplayLabel() {
-        ArgumentCaptor<MainFormDataRunnableTask> scheduledExecutorServiceArgumentCaptor = ArgumentCaptor.forClass(MainFormDataRunnableTask.class);
+    public void whenPurchaseProductWithColaThenUpdateVendingDisplayLabelToOneDollarAndScheduleFutureToUpdateVendingDisplayLabel() {
         vendingMachineBrain.setScheduledExecutorService(mockScheduledExecutorService);
 
         vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
 
         verify(mockMainFormData).updateVendingDisplayLabel("$1.00");
-        verify(mockScheduledExecutorService).schedule(scheduledExecutorServiceArgumentCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
-        assertThat(scheduledExecutorServiceArgumentCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
+        verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
+        assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
+    }
+
+    @Test
+    public void givenLessThanOneDollarButMoreThanZeroWhenPurchaseProductWithColaThenUpdateVendingDisplayLabelToOneDollarAndScheduleFutureToUpdateVendingDisplayLabelToCurrentDollarAmount() {
+        vendingMachineBrain.setScheduledExecutorService(mockScheduledExecutorService);
+        vendingMachineBrain.setCurrentDollarAmount(.5);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$1.00");
+        verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
+        assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("$0.50"));
     }
 
 }
