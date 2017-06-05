@@ -36,3 +36,4 @@ Feature: Select Product
     When I select the purchase cola button
     And I insert 1 Dimes into the vending machine
     Then the display shows "$0.10"
+    

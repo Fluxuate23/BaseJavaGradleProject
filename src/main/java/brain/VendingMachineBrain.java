@@ -85,6 +85,7 @@ public class VendingMachineBrain {
 
     public void purchaseProduct(EVendingProduct product) {
         double requiredDollarAmountForPurchase;
+        MainFormDataRunnableTask mainFormDataRunnableTask;
         String productName = product.getName();
         requiredDollarAmountForPurchase = determineRequiredDollarAmountForProduct(productName);
 
@@ -92,15 +93,14 @@ public class VendingMachineBrain {
             double remainderAfterPurchase = currentDollarAmount - requiredDollarAmountForPurchase;
             currentCoinReturnDollarAmount += remainderAfterPurchase;
             currentDollarAmount = 0;
-            mainFormData.updateVendingDisplayLabel(THANK_YOU_TEXT);
-            mainFormData.updateDispensedItemLabel(productName);
-            mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
-            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, INSERT_COIN_TEXT), UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
+            updateMainFormDataForSuccessfulPurchase(productName);
+            mainFormDataRunnableTask = new MainFormDataRunnableTask(mainFormData, INSERT_COIN_TEXT);
         } else {
             mainFormData.updateVendingDisplayLabel(formatDollarAmount(requiredDollarAmountForPurchase));
             String desiredFutureText = currentDollarAmount == 0.0 ? INSERT_COIN_TEXT : formatDollarAmount(currentDollarAmount);
-            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
+            mainFormDataRunnableTask = new MainFormDataRunnableTask(mainFormData, desiredFutureText);
         }
+        scheduledExecutorService.schedule(mainFormDataRunnableTask, UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {
@@ -109,6 +109,12 @@ public class VendingMachineBrain {
 
     public void setScheduledExecutorService(ScheduledExecutorService scheduledExecutorService) {
         this.scheduledExecutorService = scheduledExecutorService;
+    }
+
+    private void updateMainFormDataForSuccessfulPurchase(String productName) {
+        mainFormData.updateVendingDisplayLabel(THANK_YOU_TEXT);
+        mainFormData.updateDispensedItemLabel(productName);
+        mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
     }
 
     private double determineRequiredDollarAmountForProduct(String productName) {
