@@ -100,7 +100,9 @@ public class VendingMachineBrain {
     public void purchaseProduct(EVendingProduct product) {
         double requiredDollarAmountForPurchase;
         String productName = product.getName();
-        if ("Chips".equals(productName)) {
+        if ("Candy".equals(productName)) {
+            requiredDollarAmountForPurchase = .5;
+        } else if ("Chips".equals(productName)) {
             requiredDollarAmountForPurchase = .65;
         } else {
             requiredDollarAmountForPurchase = 1.0;
