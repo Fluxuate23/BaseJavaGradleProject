@@ -93,7 +93,7 @@ public class MainFormWrapperStepDefinitions {
         assertThat(mainFormWrapper.retrieveVendingDisplayLabel().getText(), is(expectedDisplayText));
     }
 
-    @Then("^\"(.*?)\" are dispensed from the vending machine$")
+    @Then("^\"(.*?)\" (?:is|are) dispensed from the vending machine$")
     public void are_dispensed_from_the_vending_machine(String dispensedItemText) {
         assertThat(mainFormWrapper.retrieveDispensedItemLabel().getText(), is(dispensedItemText));
     }
