@@ -2,6 +2,7 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
+import enums.EVendingProduct;
 import gui.forms.MainForm;
 import org.junit.Before;
 import org.junit.Test;
@@ -232,12 +233,66 @@ public class MainFormWrapperTest {
     public void givenFormIsLaunchedWhenUpdateCoinReturnDisplayLabelThenCoinReturnDisplayLabelTextIsSetWithNewValue() {
         stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
-        String expectedNewVendingDisplayLabelText = "In hindsight, the Roman Numeral Kata may have been faster";
-        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
+        String expectedCoinReturnText = "In hindsight, the Roman Numeral Kata may have been faster";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedCoinReturnText);
 
         mainFormWrapper.updateCoinReturnDisplayLabel(propertyChangeEvent);
 
-        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedNewVendingDisplayLabelText));
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedCoinReturnText));
+    }
+
+    @Test
+    public void whenRetrieveDispensedItemLabelThenLabelIsRetrievedFromTheMainForm() {
+        JLabel expectedLabel = new JLabel();
+        when(mockMainForm.getDispensedItemLabel()).thenReturn(expectedLabel);
+        assertThat(mainFormWrapper.retrieveDispensedItemLabel(), is(expectedLabel));
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenPurchaseColaButtonIsClickedThenVendingMachineBrainIsInformedOfPurchase() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrievePurchaseColaButton().doClick();
+
+        verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.COLA);
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenPurchaseChipsButtonIsClickedThenVendingMachineBrainIsInformedOfPurchase() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrievePurchaseChipsButton().doClick();
+
+        verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.CHIPS);
+    }
+
+    @Test
+    public void givenFormHasBeenLaunchedWhenPurchaseCandyButtonIsClickedThenVendingMachineBrainIsInformedOfPurchase() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        mainFormWrapper.retrievePurchaseCandyButton().doClick();
+
+        verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.CANDY);
+    }
+
+    @Test
+    public void whenLaunchFormThenAddDispensedItemDisplayLabelListenerToMainFormData() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+
+        verify(mockMainFormData).addUpdateDispensedItemLabelListener(any());
+    }
+
+    @Test
+    public void givenFormIsLaunchedWhenUpdateDispensedItemLabelThenTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedDispensedItemText = "snickers";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedDispensedItemText);
+
+        mainFormWrapper.updateDispensedItemLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveDispensedItemLabel().getText(), is(expectedDispensedItemText));
     }
 
     private void stubMainFormWithRealComponents() {
@@ -249,6 +304,10 @@ public class MainFormWrapperTest {
         when(mockMainForm.getReturnCoinsButton()).thenReturn(new JButton());
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(new JButton());
         when(mockMainForm.getCoinReturnLabel()).thenReturn(new JLabel());
+        when(mockMainForm.getPurchaseColaButton()).thenReturn(new JButton());
+        when(mockMainForm.getPurchaseChipsButton()).thenReturn(new JButton());
+        when(mockMainForm.getPurchaseCandyButton()).thenReturn(new JButton());
+        when(mockMainForm.getDispensedItemLabel()).thenReturn(new JLabel());
     }
 
     private void stubMainFormWithMockComponents() {
@@ -258,6 +317,9 @@ public class MainFormWrapperTest {
         when(mockMainForm.getInsertQuarterButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getReturnCoinsButton()).thenReturn(mock(JButton.class));
         when(mockMainForm.getCollectCoinReturnButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getPurchaseColaButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getPurchaseChipsButton()).thenReturn(mock(JButton.class));
+        when(mockMainForm.getPurchaseCandyButton()).thenReturn(mock(JButton.class));
     }
 
 }

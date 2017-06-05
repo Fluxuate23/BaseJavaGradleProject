@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import static gui.MainFormData.COIN_RETURN_LABEL_KEY;
+import static gui.MainFormData.DISPENSED_ITEM_LABEL_KEY;
 import static gui.MainFormData.VENDING_MACHINE_LABEL_KEY;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
@@ -82,5 +83,35 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, "", expectedNewValue);
         verify(mockPropertyChangeSupport).firePropertyChange(COIN_RETURN_LABEL_KEY, expectedNewValue, secondExpectedNewValue);
+    }
+
+    @Test
+    public void whenAddUpdateDispensedItemLabelListenerThenPropertyChangeSupportHasPropertyChangeListenerAddedWithCoinReturnDisplayLabelKey() {
+        mainFormData.addUpdateDispensedItemLabelListener(mockPropertyChangeListener);
+
+        verify(mockPropertyChangeSupport).addPropertyChangeListener(DISPENSED_ITEM_LABEL_KEY, mockPropertyChangeListener);
+    }
+
+    @Test
+    public void givenUpdatedDispensedItemLabelListenerWhenUpdateDispensedItemLabelThenPropertyChangeSupportPropertyChangeIsFiredWithDispensedItemLabelKey() {
+        String expectedNewValue = "pop tarts";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateDispensedItemLabel(expectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", expectedNewValue);
+    }
+
+    @Test
+    public void givenDispensedItemLabelListenerWhenUpdateDispensedItemLabelTwiceWithDifferentValuesThenPropertyChangeIsFiredWithDifferentOldValues() {
+        String expectedNewValue = "big red";
+        String secondExpectedNewValue = "juicy fruit";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateDispensedItemLabel(expectedNewValue);
+        mainFormData.updateDispensedItemLabel(secondExpectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", expectedNewValue);
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, expectedNewValue, secondExpectedNewValue);
     }
 }

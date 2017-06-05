@@ -2,6 +2,7 @@ package gui;
 
 import brain.VendingMachineBrain;
 import enums.ECoin;
+import enums.EVendingProduct;
 import gui.forms.MainForm;
 
 import javax.swing.*;
@@ -73,6 +74,10 @@ public class MainFormWrapper {
         return mainForm.getCollectCoinReturnButton();
     }
 
+    public JLabel retrieveDispensedItemLabel() {
+        return mainForm.getDispensedItemLabel();
+    }
+
     public MainForm getMainForm() {
         return mainForm;
     }
@@ -103,9 +108,15 @@ public class MainFormWrapper {
         mainForm.getCoinReturnLabel().setText(updatedCoinReturnDisplayLabelText);
     }
 
+    protected void updateDispensedItemLabel(PropertyChangeEvent propertyChangeEvent) {
+        String updatedDispensedItemLabel = propertyChangeEvent.getNewValue().toString();
+        mainForm.getDispensedItemLabel().setText(updatedDispensedItemLabel);
+    }
+
     private void initializePropertyChangeListeners() {
         mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
         mainFormData.addUpdateCoinReturnDisplayLabelListener(this::updateCoinReturnDisplayLabel);
+        mainFormData.addUpdateDispensedItemLabelListener(this::updateDispensedItemLabel);
     }
 
     private void initializeActionListeners() {
@@ -115,5 +126,8 @@ public class MainFormWrapper {
         mainForm.getInsertQuarterButton().addActionListener(e -> vendingMachineBrain.insertCoin(ECoin.QUARTER));
         mainForm.getReturnCoinsButton().addActionListener(e -> vendingMachineBrain.returnCoins());
         mainForm.getCollectCoinReturnButton().addActionListener(e -> vendingMachineBrain.collectCoinReturn());
+        mainForm.getPurchaseColaButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.COLA));
+        mainForm.getPurchaseChipsButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.CHIPS));
+        mainForm.getPurchaseCandyButton().addActionListener(e -> vendingMachineBrain.purchaseProduct(EVendingProduct.CANDY));
     }
 }
