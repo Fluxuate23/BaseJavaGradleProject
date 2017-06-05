@@ -108,9 +108,16 @@ public class VendingMachineBrain {
                 scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
             }
         } else if ("Chips".equals(product.getName())) {
-            mainFormData.updateVendingDisplayLabel("$0.65");
-            String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
-            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
+            if (currentDollarAmount > .65) {
+                mainFormData.updateVendingDisplayLabel("THANK YOU");
+                mainFormData.updateDispensedItemLabel("Chips");
+                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+
+            } else {
+                mainFormData.updateVendingDisplayLabel("$0.65");
+                String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
+                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
+            }
         }
     }
 
