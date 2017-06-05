@@ -10,6 +10,7 @@ public class MainFormData {
 
     private PropertyChangeSupport propertyChangeSupport;
     private String oldFormattedCoinReturnText = "";
+    private String oldDispensedItemName = "";
 
     public MainFormData() {
         propertyChangeSupport = new PropertyChangeSupport(this);
@@ -25,7 +26,8 @@ public class MainFormData {
     }
 
     public void updateDispensedItemLabel(String dispensedItemName) {
-        propertyChangeSupport.firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", dispensedItemName);
+        propertyChangeSupport.firePropertyChange(DISPENSED_ITEM_LABEL_KEY, oldDispensedItemName, dispensedItemName);
+        oldDispensedItemName = dispensedItemName;
     }
 
     public void addUpdateVendingDisplayLabelListener(PropertyChangeListener propertyChangeListener) {

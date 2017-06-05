@@ -101,4 +101,17 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", expectedNewValue);
     }
+
+    @Test
+    public void givenDispensedItemLabelListenerWhenUpdateDispensedItemLabelTwiceWithDifferentValuesThenPropertyChangeIsFiredWithDifferentOldValues() {
+        String expectedNewValue = "big red";
+        String secondExpectedNewValue = "juicy fruit";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateDispensedItemLabel(expectedNewValue);
+        mainFormData.updateDispensedItemLabel(secondExpectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", expectedNewValue);
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, expectedNewValue, secondExpectedNewValue);
+    }
 }
