@@ -98,7 +98,7 @@ public class VendingMachineBrain {
 
     public void purchaseProduct(EVendingProduct product) {
         if ("Cola".equals(product.getName())) {
-            if (currentDollarAmount > 1.0) {
+            if (currentDollarAmount >= 1.0) {
                 mainFormData.updateVendingDisplayLabel("THANK YOU");
                 mainFormData.updateDispensedItemLabel("Cola");
                 scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
