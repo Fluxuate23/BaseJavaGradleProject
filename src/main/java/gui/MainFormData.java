@@ -25,7 +25,7 @@ public class MainFormData {
     }
 
     public void updateDispensedItemLabel(String dispensedItemName) {
-
+        propertyChangeSupport.firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", dispensedItemName);
     }
 
     public void addUpdateVendingDisplayLabelListener(PropertyChangeListener propertyChangeListener) {

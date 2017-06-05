@@ -91,4 +91,14 @@ public class MainFormDataTest {
 
         verify(mockPropertyChangeSupport).addPropertyChangeListener(DISPENSED_ITEM_LABEL_KEY, mockPropertyChangeListener);
     }
+
+    @Test
+    public void givenUpdatedDispensedItemLabelListenerWhenUpdateDispensedItemLabelThenPropertyChangeSupportPropertyChangeIsFiredWithDispensedItemLabelKey() {
+        String expectedNewValue = "pop tarts";
+        mainFormData.addUpdateVendingDisplayLabelListener(mockPropertyChangeListener);
+
+        mainFormData.updateDispensedItemLabel(expectedNewValue);
+
+        verify(mockPropertyChangeSupport).firePropertyChange(DISPENSED_ITEM_LABEL_KEY, "", expectedNewValue);
+    }
 }
