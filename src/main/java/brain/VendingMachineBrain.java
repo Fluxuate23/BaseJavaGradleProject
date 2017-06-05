@@ -6,6 +6,7 @@ import gui.MainFormData;
 
 import java.text.DecimalFormat;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Phaser;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -96,9 +97,15 @@ public class VendingMachineBrain {
     }
 
     public void purchaseProduct(EVendingProduct product) {
-        mainFormData.updateVendingDisplayLabel("$1.00");
-        String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
-        scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
+        if (currentDollarAmount > 1.0) {
+            mainFormData.updateVendingDisplayLabel("THANK YOU");
+            mainFormData.updateDispensedItemLabel("Cola");
+            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+        } else {
+            mainFormData.updateVendingDisplayLabel("$1.00");
+            String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
+            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
+        }
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {

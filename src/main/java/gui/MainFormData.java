@@ -38,4 +38,8 @@ public class MainFormData {
     public void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
         this.propertyChangeSupport = propertyChangeSupport;
     }
+
+    public void updateDispensedItemLabel(String dispensedItemName) {
+
+    }
 }

@@ -5,10 +5,7 @@ import enums.EVendingProduct;
 import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mockito;
-import org.mockito.Spy;
+import org.mockito.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -208,6 +205,19 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData).updateVendingDisplayLabel("$1.00");
         verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
         assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("$0.50"));
+    }
+
+    @Test
+    public void givenMoreThanOneDollarWhenPurchaseProductWithColaThenUpdateVendingDisplayLabelToThankYouAndScheduleFutureToShowInsertCoinAfterOneSecondAnd() {
+        vendingMachineBrain.setScheduledExecutorService(mockScheduledExecutorService);
+        vendingMachineBrain.setCurrentDollarAmount(1.5);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("THANK YOU");
+        verify(mockMainFormData).updateDispensedItemLabel("Cola");
+        verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
+        assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
     }
 
 }
