@@ -109,7 +109,8 @@ public class MainFormWrapper {
     }
 
     protected void updateDispensedItemLabel(PropertyChangeEvent propertyChangeEvent) {
-
+        String updatedDispensedItemLabel = propertyChangeEvent.getNewValue().toString();
+        mainForm.getDispensedItemLabel().setText(updatedDispensedItemLabel);
     }
 
     private void initializePropertyChangeListeners() {

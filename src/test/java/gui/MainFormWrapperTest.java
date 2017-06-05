@@ -233,12 +233,12 @@ public class MainFormWrapperTest {
     public void givenFormIsLaunchedWhenUpdateCoinReturnDisplayLabelThenCoinReturnDisplayLabelTextIsSetWithNewValue() {
         stubMainFormWithRealComponents();
         mainFormWrapper.launchForm();
-        String expectedNewVendingDisplayLabelText = "In hindsight, the Roman Numeral Kata may have been faster";
-        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedNewVendingDisplayLabelText);
+        String expectedCoinReturnText = "In hindsight, the Roman Numeral Kata may have been faster";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedCoinReturnText);
 
         mainFormWrapper.updateCoinReturnDisplayLabel(propertyChangeEvent);
 
-        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedNewVendingDisplayLabelText));
+        assertThat(mainFormWrapper.retrieveCoinReturnLabel().getText(), is(expectedCoinReturnText));
     }
 
     @Test
@@ -283,6 +283,18 @@ public class MainFormWrapperTest {
         verify(mockMainFormData).addUpdateDispensedItemLabelListener(any());
     }
 
+    @Test
+    public void givenFormIsLaunchedWhenUpdateDispensedItemLabelThenTextIsSetWithNewValue() {
+        stubMainFormWithRealComponents();
+        mainFormWrapper.launchForm();
+        String expectedDispensedItemText = "snickers";
+        PropertyChangeEvent propertyChangeEvent = new PropertyChangeEvent(mainFormWrapper, COIN_RETURN_LABEL_KEY, "", expectedDispensedItemText);
+
+        mainFormWrapper.updateDispensedItemLabel(propertyChangeEvent);
+
+        assertThat(mainFormWrapper.retrieveDispensedItemLabel().getText(), is(expectedDispensedItemText));
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
@@ -295,6 +307,7 @@ public class MainFormWrapperTest {
         when(mockMainForm.getPurchaseColaButton()).thenReturn(new JButton());
         when(mockMainForm.getPurchaseChipsButton()).thenReturn(new JButton());
         when(mockMainForm.getPurchaseCandyButton()).thenReturn(new JButton());
+        when(mockMainForm.getDispensedItemLabel()).thenReturn(new JLabel());
     }
 
     private void stubMainFormWithMockComponents() {
