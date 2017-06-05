@@ -378,4 +378,15 @@ public class VendingMachineBrainTest {
         verify(mockMainFormData).updateCoinReturnLabel("$0.35");
     }
 
+    @Test
+    public void givenCurrentCoinReturnDollarAmountGreaterThanZeroWhenPurchaseProductWithMoreThanTheCostThenCurrentCoinReturnIsAddedToTheRemainderAfterPurchase() {
+        vendingMachineBrain.setCurrentDollarAmount(2);
+        vendingMachineBrain.setCurrentCoinReturnDollarAmount(35);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(36.0));
+        verify(mockMainFormData).updateCoinReturnLabel("$36.00");
+    }
+
 }

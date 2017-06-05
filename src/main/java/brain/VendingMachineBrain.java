@@ -109,7 +109,8 @@ public class VendingMachineBrain {
         }
 
         if (currentDollarAmount >= requiredDollarAmountForPurchase) {
-            currentCoinReturnDollarAmount = currentDollarAmount - requiredDollarAmountForPurchase;
+            double remainderAfterPurchase = currentDollarAmount - requiredDollarAmountForPurchase;
+            currentCoinReturnDollarAmount += remainderAfterPurchase;
             currentDollarAmount = 0;
             mainFormData.updateVendingDisplayLabel("THANK YOU");
             mainFormData.updateDispensedItemLabel(productName);
