@@ -348,4 +348,14 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.5));
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsGreaterThanOneDollarWhenPurchaseProductWithCokeThenTheRemainingAmountAfterPurchaseIsSetToCurrentCoinReturnDollarAmountAndMainFormDataIsInformed() {
+        vendingMachineBrain.setCurrentDollarAmount(1.5);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        assertThat(vendingMachineBrain.getCurrentCoinReturnDollarAmount(), is(.5));
+        verify(mockMainFormData).updateCoinReturnLabel("$0.50");
+    }
+
 }

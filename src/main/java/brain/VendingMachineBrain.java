@@ -118,6 +118,9 @@ public class VendingMachineBrain {
             String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
             scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
         }
+
+        currentCoinReturnDollarAmount = .5;
+        mainFormData.updateCoinReturnLabel("$0.50");
     }
 
     public ScheduledExecutorService getScheduledExecutorService() {
