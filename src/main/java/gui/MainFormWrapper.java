@@ -108,9 +108,14 @@ public class MainFormWrapper {
         mainForm.getCoinReturnLabel().setText(updatedCoinReturnDisplayLabelText);
     }
 
+    protected void updateDispensedItemLabel(PropertyChangeEvent propertyChangeEvent) {
+
+    }
+
     private void initializePropertyChangeListeners() {
         mainFormData.addUpdateVendingDisplayLabelListener(this::updateVendingDisplayLabel);
         mainFormData.addUpdateCoinReturnDisplayLabelListener(this::updateCoinReturnDisplayLabel);
+        mainFormData.addUpdateDispensedItemLabelListener(this::updateDispensedItemLabel);
     }
 
     private void initializeActionListeners() {

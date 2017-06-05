@@ -275,6 +275,14 @@ public class MainFormWrapperTest {
         verify(mockVendingMachineBrain).purchaseProduct(EVendingProduct.CANDY);
     }
 
+    @Test
+    public void whenLaunchFormThenAddDispensedItemDisplayLabelListenerToMainFormData() {
+        stubMainFormWithMockComponents();
+        mainFormWrapper.launchForm();
+
+        verify(mockMainFormData).addUpdateDispensedItemLabelListener(any());
+    }
+
     private void stubMainFormWithRealComponents() {
         when(mockMainForm.getInsertPennyButton()).thenReturn(new JButton());
         when(mockMainForm.getInsertNickleButton()).thenReturn(new JButton());
