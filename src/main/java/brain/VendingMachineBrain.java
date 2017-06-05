@@ -17,8 +17,8 @@ public class VendingMachineBrain {
     private static final String DOLLAR_SIGN_DISPLAY_FORMAT = "$%s";
     private static final String CHIPS = "Chips";
     private static final String CANDY = "Candy";
-    private static final String THANK_YOU = "THANK YOU";
-    private static final String INSERT_COIN = "INSERT COIN";
+    private static final String THANK_YOU_TEXT = "THANK YOU";
+    private static final String INSERT_COIN_TEXT = "INSERT COIN";
     private static final long UPDATE_DISPLAY_DELAY = 1L;
     private static final double DOLLAR_AMOUNT_COST_FOR_CHIPS = .5;
     private static final double DOLLAR_AMOUNT_COST_FOR_CANDY = .65;
@@ -55,7 +55,7 @@ public class VendingMachineBrain {
         currentCoinReturnDollarAmount += currentDollarAmount;
 
         if (currentDollarAmount != 0.0) {
-            mainFormData.updateVendingDisplayLabel(INSERT_COIN);
+            mainFormData.updateVendingDisplayLabel(INSERT_COIN_TEXT);
             mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
         }
         currentDollarAmount = 0.0;
@@ -92,13 +92,13 @@ public class VendingMachineBrain {
             double remainderAfterPurchase = currentDollarAmount - requiredDollarAmountForPurchase;
             currentCoinReturnDollarAmount += remainderAfterPurchase;
             currentDollarAmount = 0;
-            mainFormData.updateVendingDisplayLabel(THANK_YOU);
+            mainFormData.updateVendingDisplayLabel(THANK_YOU_TEXT);
             mainFormData.updateDispensedItemLabel(productName);
             mainFormData.updateCoinReturnLabel(formatDollarAmount(currentCoinReturnDollarAmount));
-            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, INSERT_COIN), UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
+            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, INSERT_COIN_TEXT), UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
         } else {
             mainFormData.updateVendingDisplayLabel(formatDollarAmount(requiredDollarAmountForPurchase));
-            String desiredFutureText = currentDollarAmount == 0.0 ? INSERT_COIN : formatDollarAmount(currentDollarAmount);
+            String desiredFutureText = currentDollarAmount == 0.0 ? INSERT_COIN_TEXT : formatDollarAmount(currentDollarAmount);
             scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), UPDATE_DISPLAY_DELAY, TimeUnit.SECONDS);
         }
     }
