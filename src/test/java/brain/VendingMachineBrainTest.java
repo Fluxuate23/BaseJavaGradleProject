@@ -339,4 +339,13 @@ public class VendingMachineBrainTest {
         assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.0));
     }
 
+    @Test
+    public void givenCurrentDollarAmountIsLessThanTheRequiredAmountToPurchaseProductWhenThatProductIsPurchasedThenCurrentDollarAmountIsNotResetZero() {
+        vendingMachineBrain.setCurrentDollarAmount(.5);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.COLA);
+
+        assertThat(vendingMachineBrain.getCurrentDollarAmount(), is(0.5));
+    }
+
 }
