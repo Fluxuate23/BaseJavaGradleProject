@@ -5,11 +5,10 @@ import enums.EVendingProduct;
 import gui.MainFormData;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.core.Is.is;
@@ -216,6 +215,17 @@ public class VendingMachineBrainTest {
 
         verify(mockMainFormData).updateVendingDisplayLabel("THANK YOU");
         verify(mockMainFormData).updateDispensedItemLabel("Cola");
+        verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
+        assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
+    }
+
+    @Test
+    public void whenPurchaseProductWithChipsThenUpdateVendingDisplayLabelToSixtyFiveCentsAndScheduleFutureToUpdateVendingDisplayLabelBackToInsertCoin() {
+        vendingMachineBrain.setScheduledExecutorService(mockScheduledExecutorService);
+
+        vendingMachineBrain.purchaseProduct(EVendingProduct.CHIPS);
+
+        verify(mockMainFormData).updateVendingDisplayLabel("$0.65");
         verify(mockScheduledExecutorService).schedule(mainFormDataRunnableTaskCaptor.capture(), eq(1L), eq(TimeUnit.SECONDS));
         assertThat(mainFormDataRunnableTaskCaptor.getValue().getDesiredFutureText(), is("INSERT COIN"));
     }
