@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static constants.CoinConstants.*;
 
 public class VendingMachineBrain {
+    public static final double COST_OF_MOST_EXPENSIVE_ITEM_TO_PURCHASE = 1.0;
     private static final String DECIMAL_PATTERN = "0.00";
     private static final String DOLLAR_SIGN_DISPLAY_FORMAT = "$%s";
     private double currentDollarAmount;
@@ -97,27 +98,22 @@ public class VendingMachineBrain {
     }
 
     public void purchaseProduct(EVendingProduct product) {
-        if ("Cola".equals(product.getName())) {
-            if (currentDollarAmount >= 1.0) {
-                mainFormData.updateVendingDisplayLabel("THANK YOU");
-                mainFormData.updateDispensedItemLabel("Cola");
-                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
-            } else {
-                mainFormData.updateVendingDisplayLabel("$1.00");
-                String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
-                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
-            }
-        } else if ("Chips".equals(product.getName())) {
-            if (currentDollarAmount >= .65) {
-                mainFormData.updateVendingDisplayLabel("THANK YOU");
-                mainFormData.updateDispensedItemLabel("Chips");
-                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+        double requiredDollarAmountForPurchase;
+        String productName = product.getName();
+        if ("Chips".equals(productName)) {
+            requiredDollarAmountForPurchase = .65;
+        } else {
+            requiredDollarAmountForPurchase = 1.0;
+        }
 
-            } else {
-                mainFormData.updateVendingDisplayLabel("$0.65");
-                String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
-                scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
-            }
+        if (currentDollarAmount >= requiredDollarAmountForPurchase) {
+            mainFormData.updateVendingDisplayLabel("THANK YOU");
+            mainFormData.updateDispensedItemLabel(productName);
+            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, "INSERT COIN"), 1L, TimeUnit.SECONDS);
+        } else {
+            mainFormData.updateVendingDisplayLabel(formatDollarAmount(requiredDollarAmountForPurchase));
+            String desiredFutureText = currentDollarAmount == 0.0 ? "INSERT COIN" : formatDollarAmount(currentDollarAmount);
+            scheduledExecutorService.schedule(new MainFormDataRunnableTask(mainFormData, desiredFutureText), 1L, TimeUnit.SECONDS);
         }
     }
 
