@@ -14,7 +14,7 @@ public class MainFormDataRunnableTask implements Runnable {
 
     @Override
     public void run() {
-
+        mainFormData.updateVendingDisplayLabel(desiredFutureText);
     }
 
     public String getDesiredFutureText() {
